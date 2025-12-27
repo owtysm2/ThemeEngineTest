@@ -82,7 +82,14 @@ namespace ThemeEngineTest
                     return;
                 }
 
-                prop.SetValue(targetControl, newValue);
+                try
+                {
+                    prop.SetValue(targetControl, newValue);
+                }
+                catch
+                { 
+                    // eh
+                }
             }
 
             void RecursiveApply(Control targetControl)
