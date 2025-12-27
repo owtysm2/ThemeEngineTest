@@ -139,7 +139,7 @@ namespace ThemeEngineTest.Components
             IContainer container = designerHost?.Container;
 
             Theme_Definer clonedThemeDefiner = new Theme_Definer();
-            clonedThemeDefiner.ThemeObject.DeepCloneAnotherTheme(thisThemeDefiner.ThemeObject);
+            clonedThemeDefiner.ThemeObject = thisThemeDefiner.ThemeObject.Clone();
             container.Add(clonedThemeDefiner);
 
             return value;
