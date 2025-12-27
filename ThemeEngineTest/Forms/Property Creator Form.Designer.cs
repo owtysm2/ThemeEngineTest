@@ -64,7 +64,7 @@
             // propertyValueCheckbox
             // 
             this.propertyValueCheckbox.AutoSize = true;
-            this.propertyValueCheckbox.Location = new System.Drawing.Point(119, 54);
+            this.propertyValueCheckbox.Location = new System.Drawing.Point(119, 31);
             this.propertyValueCheckbox.Name = "propertyValueCheckbox";
             this.propertyValueCheckbox.Size = new System.Drawing.Size(15, 14);
             this.propertyValueCheckbox.TabIndex = 29;
@@ -263,10 +263,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(305, 196);
+            this.Controls.Add(this.propertyValueCheckbox);
             this.Controls.Add(this.cuiPanel2);
             this.Controls.Add(this.cuiPanel1);
             this.Controls.Add(this.propertyValueTextbox);
-            this.Controls.Add(this.propertyValueCheckbox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.propertyTypeComboBox);
             this.Controls.Add(this.label4);
