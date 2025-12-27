@@ -181,6 +181,7 @@
             this.filterButton.TabIndex = 38;
             this.filterButton.TextAlignment = System.Drawing.StringAlignment.Center;
             this.filterButton.TextOffset = new System.Drawing.Point(0, 0);
+            this.filterButton.Visible = false;
             // 
             // Import_Controls_Form
             // 
