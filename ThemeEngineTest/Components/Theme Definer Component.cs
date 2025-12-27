@@ -38,6 +38,8 @@ namespace ThemeEngineTest.Components
         public Theme_Definer()
         {
             InitializeComponent();
+
+            InternalThemeManager.RegisterTheme(this);
         }
     }
 
@@ -136,11 +138,9 @@ namespace ThemeEngineTest.Components
             var designerHost = provider.GetService(typeof(IDesignerHost)) as IDesignerHost;
             IContainer container = designerHost?.Container;
 
-            using (Theme_Definer clonedThemeDefiner = new Theme_Definer())
-            {
-                clonedThemeDefiner.ThemeObject.DeepCloneAnotherTheme(thisThemeDefiner.ThemeObject);
-                container.Add(clonedThemeDefiner);
-            }
+            Theme_Definer clonedThemeDefiner = new Theme_Definer();
+            clonedThemeDefiner.ThemeObject.DeepCloneAnotherTheme(thisThemeDefiner.ThemeObject);
+            container.Add(clonedThemeDefiner);
 
             return value;
         }
