@@ -1,0 +1,119 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
+using ThemeEngineTest.Components;
+
+namespace ThemeEngineTest
+{
+    internal static class InternalThemeManager
+    {
+        internal static List<Custom_Definitions.Theme> ThemesList = new List<Custom_Definitions.Theme>();
+
+        internal static void UnregisterTheme(Theme_Definer theme_Definer)
+        {
+            if (ThemesList.Contains(theme_Definer.ThemeObject))
+            {
+                ThemesList.Remove(theme_Definer.ThemeObject);
+            }
+        }
+
+        internal static void RegisterTheme(Theme_Definer theme_Definer)
+        {
+            if (!ThemesList.Contains(theme_Definer.ThemeObject))
+            {
+                ThemesList.Add(theme_Definer.ThemeObject);
+            }
+        }
+
+        internal static void RemoveNullEntries()
+        {
+            foreach (var theme in ThemesList)
+            {
+                if (theme == null)
+                {
+                    ThemesList.Remove(theme);
+                }
+            }
+        }
+
+        internal static Custom_Definitions.Theme GetThemeFromName(string searchedName)
+        {
+            RemoveNullEntries();
+
+            foreach (var theme in ThemesList)
+            {
+                if (theme.Name == searchedName)
+                {
+                    return theme;
+                }
+            }
+
+            return null;
+        }
+
+        public static void ApplyThemeToChildren(string themeName, Control targetControlOrForm)
+        {
+            Custom_Definitions.Theme foundTheme = GetThemeFromName(themeName);
+            if (foundTheme != null)
+            {
+                ApplyThemeToChildren(foundTheme, targetControlOrForm);
+            }
+        }
+
+        public static void ApplyThemeToChildren(Custom_Definitions.Theme theme, Control targetControlOrForm)
+        {
+            void SetPropertyValueWithReflection(Control targetControl, string propertyName, object newValue)
+            {
+                // discard nonsense data
+                if (targetControl == null || string.IsNullOrWhiteSpace(propertyName))
+                {
+                    return;
+                }
+
+                PropertyInfo prop = targetControl.GetType().GetProperty(
+                    propertyName,
+                    BindingFlags.Instance | BindingFlags.Public
+                );
+
+                // not found or property is not writable
+                if (prop == null || !prop.CanWrite)
+                {
+                    return;
+                }
+
+                prop.SetValue(targetControl, newValue);
+            }
+
+            void RecursiveApply(Control targetControl)
+            {
+                foreach (Control c in targetControl.Controls)
+                {
+                    IEnumerable<Custom_Definitions.ChangingControl> filteredControls = theme.ChangingControls.Where(cc => cc.ControlName == c.Name);
+                    if (filteredControls.Count() > 0)
+                    {
+                        Custom_Definitions.ChangingControl firstMatch = filteredControls.First();
+
+                        foreach (Custom_Definitions.ChangingProperty prop in firstMatch.ChangingProperties)
+                        {
+                            SetPropertyValueWithReflection(c, prop.PropertyName, prop.PropertyValue);
+                        }
+                    }
+                    else
+                    {
+                        //MessageBox.Show("match NOT found");
+                    }
+
+                    if (c.Controls.Count == 0)
+                    {
+                        continue;
+                    }
+
+                    RecursiveApply(c);
+                }
+            }
+
+            RecursiveApply(targetControlOrForm);
+        }
+    }
+}
