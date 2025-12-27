@@ -29,20 +29,22 @@
         private void InitializeComponent()
         {
             this.themeGroupBox = new System.Windows.Forms.GroupBox();
+            this.importControlsFromCurrentFormButton = new System.Windows.Forms.Button();
             this.renameControlButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.propertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.renamePropertyButton = new System.Windows.Forms.Button();
             this.propertiesListbox = new System.Windows.Forms.ListBox();
-            this.propertyValueTextbox = new System.Windows.Forms.TextBox();
-            this.propertyValueCheckbox = new System.Windows.Forms.CheckBox();
             this.addPropertyButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.propertyTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.propertyNameTextbox = new System.Windows.Forms.TextBox();
             this.removeSelectedPropertyButton = new System.Windows.Forms.Button();
+            this.propertyEditorPanel = new System.Windows.Forms.Panel();
+            this.propertyTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.propertyValueTextbox = new System.Windows.Forms.TextBox();
+            this.propertyNameTextbox = new System.Windows.Forms.TextBox();
+            this.propertyValueCheckbox = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.propertyColorPickerPanel = new System.Windows.Forms.Panel();
             this.propertyValueColorPicker = new CuoreUI.Controls.cuiColorPickerWheel();
             this.label8 = new System.Windows.Forms.Label();
@@ -63,14 +65,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.cuiPanel2 = new CuoreUI.Controls.cuiPanel();
             this.button2 = new System.Windows.Forms.Button();
-            this.propertyEditorPanel = new System.Windows.Forms.Panel();
-            this.importControlsFromCurrentFormButton = new System.Windows.Forms.Button();
             this.themeGroupBox.SuspendLayout();
             this.propertiesGroupBox.SuspendLayout();
+            this.propertyEditorPanel.SuspendLayout();
             this.propertyColorPickerPanel.SuspendLayout();
             this.cuiPanel1.SuspendLayout();
             this.cuiPanel2.SuspendLayout();
-            this.propertyEditorPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // themeGroupBox
@@ -92,6 +92,17 @@
             this.themeGroupBox.TabIndex = 4;
             this.themeGroupBox.TabStop = false;
             this.themeGroupBox.Text = "Edit Controls";
+            // 
+            // importControlsFromCurrentFormButton
+            // 
+            this.importControlsFromCurrentFormButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.importControlsFromCurrentFormButton.Location = new System.Drawing.Point(6, 455);
+            this.importControlsFromCurrentFormButton.Name = "importControlsFromCurrentFormButton";
+            this.importControlsFromCurrentFormButton.Size = new System.Drawing.Size(214, 31);
+            this.importControlsFromCurrentFormButton.TabIndex = 13;
+            this.importControlsFromCurrentFormButton.Text = "Import Controls from Current Form";
+            this.importControlsFromCurrentFormButton.UseVisualStyleBackColor = true;
+            this.importControlsFromCurrentFormButton.Click += new System.EventHandler(this.importControlsFromCurrentFormButton_Click);
             // 
             // renameControlButton
             // 
@@ -153,23 +164,6 @@
             this.propertiesListbox.TabIndex = 12;
             this.propertiesListbox.SelectedIndexChanged += new System.EventHandler(this.propertiesListbox_SelectedIndexChanged);
             // 
-            // propertyValueTextbox
-            // 
-            this.propertyValueTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.propertyValueTextbox.Location = new System.Drawing.Point(160, 33);
-            this.propertyValueTextbox.Name = "propertyValueTextbox";
-            this.propertyValueTextbox.Size = new System.Drawing.Size(175, 20);
-            this.propertyValueTextbox.TabIndex = 17;
-            // 
-            // propertyValueCheckbox
-            // 
-            this.propertyValueCheckbox.AutoSize = true;
-            this.propertyValueCheckbox.Location = new System.Drawing.Point(160, 59);
-            this.propertyValueCheckbox.Name = "propertyValueCheckbox";
-            this.propertyValueCheckbox.Size = new System.Drawing.Size(15, 14);
-            this.propertyValueCheckbox.TabIndex = 21;
-            this.propertyValueCheckbox.UseVisualStyleBackColor = true;
-            // 
             // addPropertyButton
             // 
             this.addPropertyButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -181,15 +175,32 @@
             this.addPropertyButton.UseVisualStyleBackColor = true;
             this.addPropertyButton.Click += new System.EventHandler(this.addPropertyButton_Click);
             // 
-            // label5
+            // removeSelectedPropertyButton
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 60);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 13);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "Property Type";
+            this.removeSelectedPropertyButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.removeSelectedPropertyButton.Location = new System.Drawing.Point(35, 421);
+            this.removeSelectedPropertyButton.Name = "removeSelectedPropertyButton";
+            this.removeSelectedPropertyButton.Size = new System.Drawing.Size(112, 28);
+            this.removeSelectedPropertyButton.TabIndex = 14;
+            this.removeSelectedPropertyButton.Text = "Remove Selected";
+            this.removeSelectedPropertyButton.UseVisualStyleBackColor = true;
+            this.removeSelectedPropertyButton.Click += new System.EventHandler(this.removeSelectedPropertyButton_Click);
+            // 
+            // propertyEditorPanel
+            // 
+            this.propertyEditorPanel.Controls.Add(this.propertyTypeComboBox);
+            this.propertyEditorPanel.Controls.Add(this.propertyNameTextbox);
+            this.propertyEditorPanel.Controls.Add(this.propertyValueCheckbox);
+            this.propertyEditorPanel.Controls.Add(this.label3);
+            this.propertyEditorPanel.Controls.Add(this.label4);
+            this.propertyEditorPanel.Controls.Add(this.label5);
+            this.propertyEditorPanel.Controls.Add(this.propertyValueTextbox);
+            this.propertyEditorPanel.Controls.Add(this.propertyColorPickerPanel);
+            this.propertyEditorPanel.Location = new System.Drawing.Point(21, 31);
+            this.propertyEditorPanel.Name = "propertyEditorPanel";
+            this.propertyEditorPanel.Size = new System.Drawing.Size(357, 157);
+            this.propertyEditorPanel.TabIndex = 22;
+            this.propertyEditorPanel.Visible = false;
             // 
             // propertyTypeComboBox
             // 
@@ -206,15 +217,31 @@
             this.propertyTypeComboBox.TabIndex = 19;
             this.propertyTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.propertyTypeComboBox_SelectedIndexChanged);
             // 
-            // label4
+            // propertyValueTextbox
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(157, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 13);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Property Value";
+            this.propertyValueTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.propertyValueTextbox.Location = new System.Drawing.Point(160, 33);
+            this.propertyValueTextbox.Name = "propertyValueTextbox";
+            this.propertyValueTextbox.Size = new System.Drawing.Size(175, 20);
+            this.propertyValueTextbox.TabIndex = 17;
+            // 
+            // propertyNameTextbox
+            // 
+            this.propertyNameTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.propertyNameTextbox.Location = new System.Drawing.Point(14, 33);
+            this.propertyNameTextbox.Name = "propertyNameTextbox";
+            this.propertyNameTextbox.ReadOnly = true;
+            this.propertyNameTextbox.Size = new System.Drawing.Size(140, 20);
+            this.propertyNameTextbox.TabIndex = 15;
+            // 
+            // propertyValueCheckbox
+            // 
+            this.propertyValueCheckbox.AutoSize = true;
+            this.propertyValueCheckbox.Location = new System.Drawing.Point(160, 36);
+            this.propertyValueCheckbox.Name = "propertyValueCheckbox";
+            this.propertyValueCheckbox.Size = new System.Drawing.Size(15, 14);
+            this.propertyValueCheckbox.TabIndex = 21;
+            this.propertyValueCheckbox.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -226,25 +253,25 @@
             this.label3.TabIndex = 16;
             this.label3.Text = "Property Name";
             // 
-            // propertyNameTextbox
+            // label4
             // 
-            this.propertyNameTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.propertyNameTextbox.Location = new System.Drawing.Point(14, 33);
-            this.propertyNameTextbox.Name = "propertyNameTextbox";
-            this.propertyNameTextbox.ReadOnly = true;
-            this.propertyNameTextbox.Size = new System.Drawing.Size(140, 20);
-            this.propertyNameTextbox.TabIndex = 15;
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(157, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Property Value";
             // 
-            // removeSelectedPropertyButton
+            // label5
             // 
-            this.removeSelectedPropertyButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.removeSelectedPropertyButton.Location = new System.Drawing.Point(35, 421);
-            this.removeSelectedPropertyButton.Name = "removeSelectedPropertyButton";
-            this.removeSelectedPropertyButton.Size = new System.Drawing.Size(112, 28);
-            this.removeSelectedPropertyButton.TabIndex = 14;
-            this.removeSelectedPropertyButton.Text = "Remove Selected";
-            this.removeSelectedPropertyButton.UseVisualStyleBackColor = true;
-            this.removeSelectedPropertyButton.Click += new System.EventHandler(this.removeSelectedPropertyButton_Click);
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 60);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(73, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Property Type";
             // 
             // propertyColorPickerPanel
             // 
@@ -443,33 +470,6 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // propertyEditorPanel
-            // 
-            this.propertyEditorPanel.Controls.Add(this.propertyTypeComboBox);
-            this.propertyEditorPanel.Controls.Add(this.propertyValueTextbox);
-            this.propertyEditorPanel.Controls.Add(this.propertyNameTextbox);
-            this.propertyEditorPanel.Controls.Add(this.propertyValueCheckbox);
-            this.propertyEditorPanel.Controls.Add(this.label3);
-            this.propertyEditorPanel.Controls.Add(this.label4);
-            this.propertyEditorPanel.Controls.Add(this.label5);
-            this.propertyEditorPanel.Controls.Add(this.propertyColorPickerPanel);
-            this.propertyEditorPanel.Location = new System.Drawing.Point(21, 31);
-            this.propertyEditorPanel.Name = "propertyEditorPanel";
-            this.propertyEditorPanel.Size = new System.Drawing.Size(357, 157);
-            this.propertyEditorPanel.TabIndex = 22;
-            this.propertyEditorPanel.Visible = false;
-            // 
-            // importControlsFromCurrentFormButton
-            // 
-            this.importControlsFromCurrentFormButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.importControlsFromCurrentFormButton.Location = new System.Drawing.Point(6, 455);
-            this.importControlsFromCurrentFormButton.Name = "importControlsFromCurrentFormButton";
-            this.importControlsFromCurrentFormButton.Size = new System.Drawing.Size(214, 31);
-            this.importControlsFromCurrentFormButton.TabIndex = 13;
-            this.importControlsFromCurrentFormButton.Text = "Import Controls from Current Form";
-            this.importControlsFromCurrentFormButton.UseVisualStyleBackColor = true;
-            this.importControlsFromCurrentFormButton.Click += new System.EventHandler(this.importControlsFromCurrentFormButton_Click);
-            // 
             // Theme_Editor_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -487,12 +487,12 @@
             this.themeGroupBox.ResumeLayout(false);
             this.themeGroupBox.PerformLayout();
             this.propertiesGroupBox.ResumeLayout(false);
+            this.propertyEditorPanel.ResumeLayout(false);
+            this.propertyEditorPanel.PerformLayout();
             this.propertyColorPickerPanel.ResumeLayout(false);
             this.propertyColorPickerPanel.PerformLayout();
             this.cuiPanel1.ResumeLayout(false);
             this.cuiPanel2.ResumeLayout(false);
-            this.propertyEditorPanel.ResumeLayout(false);
-            this.propertyEditorPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
