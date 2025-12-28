@@ -98,14 +98,27 @@ namespace ThemeEngineTest.Forms
             {
                 propertyNameTextbox.TextChanged += (e, s) =>
                 {
-                    // update current selected property's value to the newly selected color
+                    // update current selected property's value to the newly typed in text value
                     Custom_Definitions.ChangingProperty currentChangingProperty = GetSelectedChangingProperty();
                     if (currentChangingProperty != null)
                     {
                         string newName = propertyNameTextbox.Text.Trim();
                         if (newName != string.Empty)
                         {
+                            propertiesListbox.SuspendLayout();
+
+                            // remove old name from the listbox
+                            int listboxIndex = propertiesListbox.Items.IndexOf(currentChangingProperty.PropertyName);
+                            propertiesListbox.Items.RemoveAt(listboxIndex);
+
+                            // update selected property's PropertyName
                             currentChangingProperty.PropertyName = propertyNameTextbox.Text;
+
+                            // update listbox with the new name at the index of the old name
+                            propertiesListbox.Items.Insert(listboxIndex, currentChangingProperty.PropertyName);
+
+                            // re-select the now-renamed property
+                            propertiesListbox.SelectedItem = currentChangingProperty.PropertyName;
                         }
                     }
                 };
@@ -351,30 +364,6 @@ namespace ThemeEngineTest.Forms
             }
         }
 
-        private void renamePropertyButton_Click(object sender, EventArgs e)
-        {
-            Custom_Definitions.ChangingProperty currentChangingProperty = GetSelectedChangingProperty();
-            if (currentChangingProperty != null)
-            {
-                Renamer_Form renamerForm = new Renamer_Form(oldName: currentChangingProperty.PropertyName);
-                if (renamerForm.ShowDialog() == DialogResult.OK)
-                {
-                    // remove old name from the listbox
-                    int listboxIndex = propertiesListbox.Items.IndexOf(currentChangingProperty.PropertyName);
-                    propertiesListbox.Items.RemoveAt(listboxIndex);
-
-                    // update selected property's PropertyName
-                    currentChangingProperty.PropertyName = renamerForm.NewName;
-
-                    // update listbox with the new name at the index of the old name
-                    propertiesListbox.Items.Insert(listboxIndex, currentChangingProperty.PropertyName);
-
-                    // re-select the now-renamed property
-                    propertiesListbox.SelectedItem = currentChangingProperty.PropertyName;
-                }
-            }
-        }
-
         private void importControlsFromCurrentFormButton_Click(object sender, EventArgs e)
         {
             if (referenceToFormOpenedInDesigner != null && !referenceToFormOpenedInDesigner.IsDisposed)
@@ -388,6 +377,12 @@ namespace ThemeEngineTest.Forms
                         {
                             foreach (string c in importControlsForm.ControlsToImportNamesResult)
                             {
+                                // avoid duplicates
+                                if (controlsNamesListbox.Items.Contains(c))
+                                {
+                                    continue;
+                                }
+
                                 controlsNamesListbox.Items.Add(c);
                                 EditedTheme.ChangingControls.Add(new Custom_Definitions.ChangingControl()
                                 {

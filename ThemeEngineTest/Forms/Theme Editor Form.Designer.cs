@@ -33,18 +33,17 @@
             this.renameControlButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.propertiesGroupBox = new System.Windows.Forms.GroupBox();
-            this.renamePropertyButton = new System.Windows.Forms.Button();
             this.propertiesListbox = new System.Windows.Forms.ListBox();
             this.addPropertyButton = new System.Windows.Forms.Button();
             this.removeSelectedPropertyButton = new System.Windows.Forms.Button();
             this.propertyEditorPanel = new System.Windows.Forms.Panel();
             this.propertyTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.propertyValueTextbox = new System.Windows.Forms.TextBox();
             this.propertyNameTextbox = new System.Windows.Forms.TextBox();
             this.propertyValueCheckbox = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.propertyValueTextbox = new System.Windows.Forms.TextBox();
             this.propertyColorPickerPanel = new System.Windows.Forms.Panel();
             this.propertyValueColorPicker = new CuoreUI.Controls.cuiColorPickerWheel();
             this.label8 = new System.Windows.Forms.Label();
@@ -130,7 +129,6 @@
             this.propertiesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.propertiesGroupBox.Controls.Add(this.renamePropertyButton);
             this.propertiesGroupBox.Controls.Add(this.propertiesListbox);
             this.propertiesGroupBox.Controls.Add(this.addPropertyButton);
             this.propertiesGroupBox.Controls.Add(this.removeSelectedPropertyButton);
@@ -142,17 +140,6 @@
             this.propertiesGroupBox.TabStop = false;
             this.propertiesGroupBox.Text = "Edit Properties";
             this.propertiesGroupBox.Visible = false;
-            // 
-            // renamePropertyButton
-            // 
-            this.renamePropertyButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.renamePropertyButton.Location = new System.Drawing.Point(223, 421);
-            this.renamePropertyButton.Name = "renamePropertyButton";
-            this.renamePropertyButton.Size = new System.Drawing.Size(62, 28);
-            this.renamePropertyButton.TabIndex = 13;
-            this.renamePropertyButton.Text = "Rename";
-            this.renamePropertyButton.UseVisualStyleBackColor = true;
-            this.renamePropertyButton.Click += new System.EventHandler(this.renamePropertyButton_Click);
             // 
             // propertiesListbox
             // 
@@ -217,20 +204,11 @@
             this.propertyTypeComboBox.TabIndex = 19;
             this.propertyTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.propertyTypeComboBox_SelectedIndexChanged);
             // 
-            // propertyValueTextbox
-            // 
-            this.propertyValueTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.propertyValueTextbox.Location = new System.Drawing.Point(160, 33);
-            this.propertyValueTextbox.Name = "propertyValueTextbox";
-            this.propertyValueTextbox.Size = new System.Drawing.Size(175, 20);
-            this.propertyValueTextbox.TabIndex = 17;
-            // 
             // propertyNameTextbox
             // 
             this.propertyNameTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.propertyNameTextbox.Location = new System.Drawing.Point(14, 33);
             this.propertyNameTextbox.Name = "propertyNameTextbox";
-            this.propertyNameTextbox.ReadOnly = true;
             this.propertyNameTextbox.Size = new System.Drawing.Size(140, 20);
             this.propertyNameTextbox.TabIndex = 15;
             // 
@@ -272,6 +250,14 @@
             this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 20;
             this.label5.Text = "Property Type";
+            // 
+            // propertyValueTextbox
+            // 
+            this.propertyValueTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.propertyValueTextbox.Location = new System.Drawing.Point(160, 33);
+            this.propertyValueTextbox.Name = "propertyValueTextbox";
+            this.propertyValueTextbox.Size = new System.Drawing.Size(175, 20);
+            this.propertyValueTextbox.TabIndex = 17;
             // 
             // propertyColorPickerPanel
             // 
@@ -533,7 +519,6 @@
         private System.Windows.Forms.TextBox rTextbox;
         private System.Windows.Forms.Panel propertyColorPickerPanel;
         private System.Windows.Forms.Button renameControlButton;
-        private System.Windows.Forms.Button renamePropertyButton;
         private System.Windows.Forms.Panel propertyEditorPanel;
         private System.Windows.Forms.Button importControlsFromCurrentFormButton;
     }
