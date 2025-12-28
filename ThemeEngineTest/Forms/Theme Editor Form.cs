@@ -311,8 +311,9 @@ namespace ThemeEngineTest.Forms
         private void propertyTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Custom_Definitions.ChangingProperty currentChangingProperty = GetSelectedChangingProperty();
-            bool canEditChangingPropertyObject = currentChangingProperty != null;
+            bool canEditChangingPropertyObject = currentChangingProperty != null && !preventPropertyUpdates;
 
+            preventPropertyUpdates = true;
             switch ((string)propertyTypeComboBox.SelectedItem)
             {
                 case "String":
@@ -322,7 +323,10 @@ namespace ThemeEngineTest.Forms
                     if (canEditChangingPropertyObject)
                     {
                         currentChangingProperty.PropertyType = Custom_Definitions.PropertyType.String;
+                        currentChangingProperty.PropertyValue = "";
+                        propertyValueTextbox.Text = "";
                     }
+
                     break;
                 case "Color":
                     propertyColorPickerPanel.Visible = true;
@@ -331,6 +335,12 @@ namespace ThemeEngineTest.Forms
                     if (canEditChangingPropertyObject)
                     {
                         currentChangingProperty.PropertyType = Custom_Definitions.PropertyType.Color;
+                        currentChangingProperty.PropertyValue = Color.White;
+                        propertyValueColorPicker.Content = Color.White;
+                        aTextbox.Text = 255.ToString();
+                        rTextbox.Text = 255.ToString();
+                        gTextbox.Text = 255.ToString();
+                        bTextbox.Text = 255.ToString();
                     }
                     break;
                 case "Bool":
@@ -340,9 +350,12 @@ namespace ThemeEngineTest.Forms
                     if (canEditChangingPropertyObject)
                     {
                         currentChangingProperty.PropertyType = Custom_Definitions.PropertyType.Bool;
+                        currentChangingProperty.PropertyValue = false;
+                        propertyValueCheckbox.Checked = false;
                     }
                     break;
             }
+            preventPropertyUpdates = false;
         }
 
         private void themeNameTextbox_TextChanged(object sender, EventArgs e)
@@ -360,7 +373,9 @@ namespace ThemeEngineTest.Forms
             if (currentChangingProperty != null)
             {
                 propertyNameTextbox.Text = currentChangingProperty.PropertyName;
+                preventPropertyUpdates = true;
                 propertyTypeComboBox.SelectedItem = currentChangingProperty.PropertyType.ToString();
+                preventPropertyUpdates = false;
 
                 preventPropertyUpdates = true;
                 try
@@ -394,17 +409,21 @@ namespace ThemeEngineTest.Forms
                     {
                         case Custom_Definitions.PropertyType.String:
                             currentChangingProperty.PropertyValue = "";
+                            propertyValueTextbox.Text = "";
                             break;
                         case Custom_Definitions.PropertyType.Color:
                             currentChangingProperty.PropertyValue = Color.White;
+                            propertyValueColorPicker.Content = Color.White;
+                            aTextbox.Text = 255.ToString();
+                            rTextbox.Text = 255.ToString();
+                            gTextbox.Text = 255.ToString();
+                            bTextbox.Text = 255.ToString();
                             break;
                         case Custom_Definitions.PropertyType.Bool:
                             currentChangingProperty.PropertyValue = false;
+                            propertyValueCheckbox.Checked = false;
                             break;
                     }
-
-                    // call the same method, now the cast won't fail
-                    propertiesListbox_SelectedIndexChanged(sender, e);
                 }
                 preventPropertyUpdates = false;
             }

@@ -122,6 +122,7 @@ namespace ThemeEngineTest
                 {
                     ChangingControl newChangingControl = new ChangingControl();
                     newChangingControl.ControlName = ctrl.ControlName;
+                    newChangingControl.IsTypeTemplate = ctrl.IsTypeTemplate;
 
                     foreach (var prop in ctrl.ChangingProperties)
                     {
