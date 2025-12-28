@@ -103,7 +103,13 @@ namespace ThemeEngineTest.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string name = propertyNameTextbox.Text;
+            string name = propertyNameTextbox.Text.Trim();
+            if (name == string.Empty)
+            {
+                // avoid blank names
+                return;
+            }
+
             Custom_Definitions.PropertyType type = Custom_Definitions.PropertyTypeFromString((string)propertyTypeComboBox.SelectedItem);
             object value = Custom_Definitions.PropertyType.String;
             switch (type)

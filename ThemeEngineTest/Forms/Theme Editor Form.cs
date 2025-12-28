@@ -319,16 +319,28 @@ namespace ThemeEngineTest.Forms
                     propertyValueTextbox.Visible = true;
                     propertyColorPickerPanel.Visible = false;
                     propertyValueCheckbox.Visible = false;
+                    if (canEditChangingPropertyObject)
+                    {
+                        currentChangingProperty.PropertyType = Custom_Definitions.PropertyType.String;
+                    }
                     break;
                 case "Color":
                     propertyColorPickerPanel.Visible = true;
                     propertyValueCheckbox.Visible = false;
                     propertyValueTextbox.Visible = false;
+                    if (canEditChangingPropertyObject)
+                    {
+                        currentChangingProperty.PropertyType = Custom_Definitions.PropertyType.Color;
+                    }
                     break;
                 case "Bool":
                     propertyValueCheckbox.Visible = true;
                     propertyValueTextbox.Visible = false;
                     propertyColorPickerPanel.Visible = false;
+                    if (canEditChangingPropertyObject)
+                    {
+                        currentChangingProperty.PropertyType = Custom_Definitions.PropertyType.Bool;
+                    }
                     break;
             }
         }
@@ -351,22 +363,48 @@ namespace ThemeEngineTest.Forms
                 propertyTypeComboBox.SelectedItem = currentChangingProperty.PropertyType.ToString();
 
                 preventPropertyUpdates = true;
-                switch (currentChangingProperty.PropertyType)
+                try
                 {
-                    case Custom_Definitions.PropertyType.String:
-                        propertyValueTextbox.Text = (string)currentChangingProperty.PropertyValue;
-                        break;
-                    case Custom_Definitions.PropertyType.Color:
-                        Color c = (Color)currentChangingProperty.PropertyValue;
-                        aTextbox.Text = c.A.ToString();
-                        rTextbox .Text = c.R.ToString();
-                        gTextbox.Text = c.G.ToString();
-                        bTextbox .Text = c.B.ToString();
-                        propertyValueColorPicker.Content = c;
-                        break;
-                    case Custom_Definitions.PropertyType.Bool:
-                        propertyValueCheckbox.Checked = (bool)currentChangingProperty.PropertyValue;
-                        break;
+                    switch (currentChangingProperty.PropertyType)
+                    {
+                        case Custom_Definitions.PropertyType.String:
+                            propertyValueTextbox.Text = (string)currentChangingProperty.PropertyValue;
+                            break;
+                        case Custom_Definitions.PropertyType.Color:
+                            Color c = (Color)currentChangingProperty.PropertyValue;
+                            aTextbox.Text = c.A.ToString();
+                            rTextbox.Text = c.R.ToString();
+                            gTextbox.Text = c.G.ToString();
+                            bTextbox.Text = c.B.ToString();
+                            propertyValueColorPicker.Content = c;
+                            break;
+                        case Custom_Definitions.PropertyType.Bool:
+                            propertyValueCheckbox.Checked = (bool)currentChangingProperty.PropertyValue;
+                            break;
+                    }
+                }
+                catch
+                {
+                    // cast not succeeded
+                    // this means the developer selected another type from the combobox
+                    // but didnt modify the value
+
+                    // this set the value to a default one
+                    switch (currentChangingProperty.PropertyType)
+                    {
+                        case Custom_Definitions.PropertyType.String:
+                            currentChangingProperty.PropertyValue = "";
+                            break;
+                        case Custom_Definitions.PropertyType.Color:
+                            currentChangingProperty.PropertyValue = Color.White;
+                            break;
+                        case Custom_Definitions.PropertyType.Bool:
+                            currentChangingProperty.PropertyValue = false;
+                            break;
+                    }
+
+                    // call the same method, now the cast won't fail
+                    propertiesListbox_SelectedIndexChanged(sender, e);
                 }
                 preventPropertyUpdates = false;
             }
