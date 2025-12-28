@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Import_Properties_From_Type_Form));
-            this.filterButton = new CuoreUI.Controls.cuiButton();
             this.selectAllButton = new System.Windows.Forms.Button();
             this.deselectAllButton = new System.Windows.Forms.Button();
             this.cuiPanel2 = new CuoreUI.Controls.cuiPanel();
@@ -40,46 +38,6 @@
             this.cuiPanel2.SuspendLayout();
             this.cuiPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // filterButton
-            // 
-            this.filterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.filterButton.CheckButton = false;
-            this.filterButton.Checked = false;
-            this.filterButton.CheckedBackground = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.filterButton.CheckedForeColor = System.Drawing.Color.White;
-            this.filterButton.CheckedImageTint = System.Drawing.Color.White;
-            this.filterButton.CheckedOutline = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(0)))));
-            this.filterButton.Content = "";
-            this.filterButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.filterButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.filterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.filterButton.ForeColor = System.Drawing.Color.Black;
-            this.filterButton.HoverBackground = System.Drawing.Color.White;
-            this.filterButton.HoverForeColor = System.Drawing.Color.Black;
-            this.filterButton.HoverImageTint = System.Drawing.Color.Black;
-            this.filterButton.HoverOutline = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.filterButton.Image = ((System.Drawing.Image)(resources.GetObject("filterButton.Image")));
-            this.filterButton.ImageAutoCenter = true;
-            this.filterButton.ImageExpand = new System.Drawing.Point(0, 0);
-            this.filterButton.ImageOffset = new System.Drawing.Point(0, 0);
-            this.filterButton.Location = new System.Drawing.Point(239, 16);
-            this.filterButton.Name = "filterButton";
-            this.filterButton.NormalBackground = System.Drawing.Color.White;
-            this.filterButton.NormalForeColor = System.Drawing.Color.Black;
-            this.filterButton.NormalImageTint = System.Drawing.Color.Black;
-            this.filterButton.NormalOutline = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.filterButton.OutlineThickness = 1F;
-            this.filterButton.PressedBackground = System.Drawing.Color.WhiteSmoke;
-            this.filterButton.PressedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.filterButton.PressedImageTint = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.filterButton.PressedOutline = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.filterButton.Rounding = new System.Windows.Forms.Padding(4);
-            this.filterButton.Size = new System.Drawing.Size(36, 22);
-            this.filterButton.TabIndex = 46;
-            this.filterButton.TextAlignment = System.Drawing.StringAlignment.Center;
-            this.filterButton.TextOffset = new System.Drawing.Point(0, 0);
-            this.filterButton.Visible = false;
             // 
             // selectAllButton
             // 
@@ -169,7 +127,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(288, 453);
-            this.Controls.Add(this.filterButton);
             this.Controls.Add(this.selectAllButton);
             this.Controls.Add(this.deselectAllButton);
             this.Controls.Add(this.cuiPanel2);
@@ -186,7 +143,6 @@
         }
 
         #endregion
-        private CuoreUI.Controls.cuiButton filterButton;
         private System.Windows.Forms.Button selectAllButton;
         private System.Windows.Forms.Button deselectAllButton;
         private CuoreUI.Controls.cuiPanel cuiPanel2;

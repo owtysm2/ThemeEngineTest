@@ -7,7 +7,7 @@ using System.Windows.Forms.Design;
 
 namespace ThemeEngineTest.Components
 {
-    public partial class Theme_Definer : Component
+    public partial class Theme_Definer : Component, IDisposable
     {
         // unexposed to the designer, a custom form will handle editing this object
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -39,6 +39,12 @@ namespace ThemeEngineTest.Components
         {
             InitializeComponent();
             InternalThemeManager.RegisterTheme(this);
+            Disposed += Theme_Definer_Disposed;
+        }
+
+        private void Theme_Definer_Disposed(object sender, EventArgs e)
+        {
+            InternalThemeManager.UnregisterTheme(this);
         }
     }
 
