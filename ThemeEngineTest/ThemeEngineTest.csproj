@@ -72,12 +72,6 @@
     <Compile Include="Forms\Property Creator Form.Designer.cs">
       <DependentUpon>Property Creator Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Control Editor Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Control Editor Form.Designer.cs">
-      <DependentUpon>Control Editor Form.cs</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\VisualStudio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\Theme Editor Form.cs">
@@ -101,9 +95,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Property Creator Form.resx">
       <DependentUpon>Property Creator Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Control Editor Form.resx">
-      <DependentUpon>Control Editor Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Theme Editor Form.resx">
       <DependentUpon>Theme Editor Form.cs</DependentUpon>

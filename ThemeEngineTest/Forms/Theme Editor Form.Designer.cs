@@ -30,7 +30,6 @@
         {
             this.themeGroupBox = new System.Windows.Forms.GroupBox();
             this.importControlsFromCurrentFormButton = new System.Windows.Forms.Button();
-            this.renameControlButton = new System.Windows.Forms.Button();
             this.propertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.propertiesListbox = new System.Windows.Forms.ListBox();
             this.addPropertyButton = new System.Windows.Forms.Button();
@@ -72,6 +71,8 @@
             this.changingControlPropertiesNameRadio = new System.Windows.Forms.RadioButton();
             this.changingControlPropertiesTypeRadio = new System.Windows.Forms.RadioButton();
             this.cuiPanel4 = new CuoreUI.Controls.cuiPanel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.themeGroupBox.SuspendLayout();
             this.propertiesGroupBox.SuspendLayout();
             this.propertyEditorPanel.SuspendLayout();
@@ -88,7 +89,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.themeGroupBox.Controls.Add(this.importControlsFromCurrentFormButton);
-            this.themeGroupBox.Controls.Add(this.renameControlButton);
             this.themeGroupBox.Controls.Add(this.propertiesGroupBox);
             this.themeGroupBox.Controls.Add(this.removeSelectedControlButton);
             this.themeGroupBox.Controls.Add(this.controlsNamesListbox);
@@ -110,18 +110,6 @@
             this.importControlsFromCurrentFormButton.Text = "Import Controls from Current Form";
             this.importControlsFromCurrentFormButton.UseVisualStyleBackColor = true;
             this.importControlsFromCurrentFormButton.Click += new System.EventHandler(this.importControlsFromCurrentFormButton_Click);
-            // 
-            // renameControlButton
-            // 
-            this.renameControlButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.renameControlButton.Location = new System.Drawing.Point(158, 421);
-            this.renameControlButton.Name = "renameControlButton";
-            this.renameControlButton.Size = new System.Drawing.Size(62, 28);
-            this.renameControlButton.TabIndex = 12;
-            this.renameControlButton.Text = "Edit";
-            this.renameControlButton.UseVisualStyleBackColor = true;
-            this.renameControlButton.Visible = false;
-            this.renameControlButton.Click += new System.EventHandler(this.renameControlButton_Click);
             // 
             // propertiesGroupBox
             // 
@@ -175,6 +163,8 @@
             // 
             // propertyEditorPanel
             // 
+            this.propertyEditorPanel.Controls.Add(this.button4);
+            this.propertyEditorPanel.Controls.Add(this.button3);
             this.propertyEditorPanel.Controls.Add(this.propertyTypeComboBox);
             this.propertyEditorPanel.Controls.Add(this.propertyNameTextbox);
             this.propertyEditorPanel.Controls.Add(this.propertyValueCheckbox);
@@ -577,6 +567,28 @@
             this.cuiPanel4.Size = new System.Drawing.Size(357, 51);
             this.cuiPanel4.TabIndex = 26;
             // 
+            // button3
+            // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button3.Location = new System.Drawing.Point(9, 100);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(74, 28);
+            this.button3.TabIndex = 26;
+            this.button3.Text = "Copy Value";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button4.Location = new System.Drawing.Point(86, 100);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(74, 28);
+            this.button4.TabIndex = 27;
+            this.button4.Text = "Paste Value";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Theme_Editor_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -642,7 +654,6 @@
         private System.Windows.Forms.TextBox gTextbox;
         private System.Windows.Forms.TextBox rTextbox;
         private System.Windows.Forms.Panel propertyColorPickerPanel;
-        private System.Windows.Forms.Button renameControlButton;
         private System.Windows.Forms.Panel propertyEditorPanel;
         private System.Windows.Forms.Button importControlsFromCurrentFormButton;
         private System.Windows.Forms.RadioButton changingControlNameRadio;
@@ -653,5 +664,7 @@
         private System.Windows.Forms.RadioButton changingControlPropertiesNameRadio;
         private System.Windows.Forms.RadioButton changingControlPropertiesTypeRadio;
         private CuoreUI.Controls.cuiPanel cuiPanel4;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
     }
 }

@@ -514,27 +514,7 @@ namespace ThemeEngineTest.Forms
 
         private void renameControlButton_Click(object sender, EventArgs e)
         {
-            Custom_Definitions.ChangingControl currentChangingControl = GetSelectedChangingControl();
-            if (currentChangingControl != null)
-            {
-                Control_Editor_Form controlEditorForm = new Control_Editor_Form(oldName: currentChangingControl.ControlName, oldIsTypeTemplate: currentChangingControl.IsTypeTemplate);
-                if (controlEditorForm.ShowDialog() == DialogResult.OK)
-                {
-                    // remove old name from the listbox
-                    int listboxIndex = controlsNamesListbox.Items.IndexOf(currentChangingControl.ControlName);
-                    controlsNamesListbox.Items.RemoveAt(listboxIndex);
-
-                    // update selected control's ControlName property
-                    currentChangingControl.ControlName = controlEditorForm.NewName;
-                    currentChangingControl.IsTypeTemplate = controlEditorForm.IsTypeTemplate;
-
-                    // update listbox with the new name at the index of the old name
-                    controlsNamesListbox.Items.Insert(listboxIndex, currentChangingControl.ControlName);
-
-                    // re-select the now-renamed control
-                    controlsNamesListbox.SelectedItem = currentChangingControl.ControlName;
-                }
-            }
+  
         }
 
         private void importControlsFromCurrentFormButton_Click(object sender, EventArgs e)
@@ -624,6 +604,45 @@ namespace ThemeEngineTest.Forms
                 changingControlPropertiesNameTextbox.SelectionLength = 0;
                 // .. and move the selection to the front
                 changingControlPropertiesNameTextbox.SelectionStart = changingControlPropertiesNameTextbox.Text.Length;
+            }
+        }
+
+        string copiedString = "";
+        bool copiedBool = false;
+        Color copiedColor = Color.White;
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            copiedString = propertyValueTextbox.Text;
+            copiedBool = propertyValueCheckbox.Checked;
+            try
+            {
+                copiedColor = Color.FromArgb(int.Parse(aTextbox.Text), propertyValueColorPicker.Content);
+            }
+            catch { }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Custom_Definitions.ChangingProperty currentChangingProperty = GetSelectedChangingProperty();
+            if (currentChangingProperty != null)
+            {
+                switch (currentChangingProperty.PropertyType)
+                {
+                    case Custom_Definitions.PropertyType.String:
+                        propertyValueTextbox.Text = copiedString;
+                        break;
+                    case Custom_Definitions.PropertyType.Color:
+                        aTextbox.Text = copiedColor.A.ToString();
+                        rTextbox.Text = copiedColor.R.ToString();
+                        gTextbox.Text = copiedColor.G.ToString();
+                        bTextbox.Text = copiedColor.B.ToString();
+                        propertyValueColorPicker.Content = copiedColor;
+                        break;
+                    case Custom_Definitions.PropertyType.Bool:
+                        propertyValueCheckbox.Checked = copiedBool;
+                        break;
+                }
             }
         }
     }

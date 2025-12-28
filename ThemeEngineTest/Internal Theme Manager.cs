@@ -87,7 +87,7 @@ namespace ThemeEngineTest
                     prop.SetValue(targetControl, newValue);
                 }
                 catch
-                { 
+                {
                     // eh
                 }
             }
@@ -129,20 +129,23 @@ namespace ThemeEngineTest
                 }
             }
 
-            // target is not a form, therefore is most likely a typical control
-            if (targetControlOrForm is Form == false)
+            void applyToSelfIfForm()
             {
                 IEnumerable<Custom_Definitions.ChangingControl> changingControlsMatchingName = theme.ChangingControls.Where(cc => (!cc.IsTypeTemplate && cc.ControlName == targetControlOrForm.Name));
-                IEnumerable<Custom_Definitions.ChangingControl> changingControlsTemplated = theme.ChangingControls.Where(cc => cc.IsTypeTemplate && cc.ControlName == targetControlOrForm.GetType().Name);
 
-                // template first, name matches will override the template later
-                if (changingControlsTemplated.Count() > 0)
+                if (targetControlOrForm is Form)
                 {
-                    Custom_Definitions.ChangingControl template = changingControlsTemplated.First();
+                    IEnumerable<Custom_Definitions.ChangingControl> changingControlsTemplated = theme.ChangingControls.Where(cc => cc.IsTypeTemplate && cc.ControlName == "Form");
 
-                    foreach (Custom_Definitions.ChangingProperty prop in template.ChangingProperties)
+                    // template first, name matches will override the template later
+                    if (changingControlsTemplated.Count() > 0)
                     {
-                        SetPropertyValueWithReflection(targetControlOrForm, prop.PropertyName, prop.PropertyValue);
+                        Custom_Definitions.ChangingControl template = changingControlsTemplated.First();
+
+                        foreach (Custom_Definitions.ChangingProperty prop in template.ChangingProperties)
+                        {
+                            SetPropertyValueWithReflection(targetControlOrForm, prop.PropertyName, prop.PropertyValue);
+                        }
                     }
                 }
 
@@ -156,6 +159,8 @@ namespace ThemeEngineTest
                     }
                 }
             }
+
+            applyToSelfIfForm();
             RecursiveApply(targetControlOrForm);
         }
     }
