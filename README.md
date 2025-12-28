@@ -5,14 +5,19 @@
 
 ---
 # 📃 The Overview
-This project aims to provide theming(*-ish?*) capabilities for WinForms.<br>
+This project aims to provide designer-driven theming(*-ish?*) capabilities for WinForms.<br>
 You can define themes with the `Theme Definer` component. Then, give the theme a name, mark which controls to affect, pick what properties to change and to what values.
 
 ## Quick Explanation
 `Themes` can be shared across forms, as when your form opens, its themes report themselves to the `Internal Theme Manager` class.<br>
 A `Theme` is an object created by the `Theme Definer`. It contains the theme's name, alongside the info on what controls and/or properties to change.
 
+> [!NOTE]
+> Every `Theme` is serialized in your Form's resources, so that it persists.<br>
+> The `Theme` will only be accessible to other forms, if its parent form had already been shown.
+
 ### In short
+Create at design-time, load at run-time:
 - Each theme is created with a `Theme Definer`
 - Each theme gets assigned a name and a list of types (or individual controls) to affect
 - Each type (or individual control) gets assigned a list of properties to change.
