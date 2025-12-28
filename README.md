@@ -26,9 +26,7 @@ Create at design-time, load at run-time:
 
 # 🚧 Important Notes
 > [!WARNING]
-> If you want to use a theme across Forms, the Theme's `Theme Definer` mustn't be disposed or null.
->
-> Otherwise, you'll be applying a null theme and ThemeEngineTest will raise an exception.
+> If you want to use a theme across Forms, the Theme's `parent Form (to which it was added) needs to have been shown at least once.
 
 > [!NOTE]
 > Dynamically created controls need to have the theme applied manually after creation:
