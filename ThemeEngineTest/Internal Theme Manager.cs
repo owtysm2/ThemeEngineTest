@@ -129,6 +129,33 @@ namespace ThemeEngineTest
                 }
             }
 
+            // target is not a form, therefore is most likely a typical control
+            if (targetControlOrForm is Form == false)
+            {
+                IEnumerable<Custom_Definitions.ChangingControl> changingControlsMatchingName = theme.ChangingControls.Where(cc => (!cc.IsTypeTemplate && cc.ControlName == targetControlOrForm.Name));
+                IEnumerable<Custom_Definitions.ChangingControl> changingControlsTemplated = theme.ChangingControls.Where(cc => cc.IsTypeTemplate && cc.ControlName == targetControlOrForm.GetType().Name);
+
+                // template first, name matches will override the template later
+                if (changingControlsTemplated.Count() > 0)
+                {
+                    Custom_Definitions.ChangingControl template = changingControlsTemplated.First();
+
+                    foreach (Custom_Definitions.ChangingProperty prop in template.ChangingProperties)
+                    {
+                        SetPropertyValueWithReflection(targetControlOrForm, prop.PropertyName, prop.PropertyValue);
+                    }
+                }
+
+                if (changingControlsMatchingName.Count() > 0)
+                {
+                    Custom_Definitions.ChangingControl retrievedChangingControl = changingControlsMatchingName.First();
+
+                    foreach (Custom_Definitions.ChangingProperty prop in retrievedChangingControl.ChangingProperties)
+                    {
+                        SetPropertyValueWithReflection(targetControlOrForm, prop.PropertyName, prop.PropertyValue);
+                    }
+                }
+            }
             RecursiveApply(targetControlOrForm);
         }
     }
