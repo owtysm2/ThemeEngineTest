@@ -20,6 +20,8 @@ A `"Theme"` is an object created by the `Theme Definer`. It contains the theme's
 <img width="1609" height="932" alt="image" src="https://github.com/user-attachments/assets/6450a3d0-ed7f-42d0-9c9b-619ca1eccdc3" />
 
 # 😼 Usage Example
+(screenshots are currently outdated)
+
 **1.** Drag a `Theme Definer` from your toolbox onto your Form
 
 <img width="429" height="60" alt="image" src="https://github.com/user-attachments/assets/440eb4a5-2b28-449b-821b-2c95291aeb46" />
