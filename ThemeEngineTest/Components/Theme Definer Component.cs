@@ -7,7 +7,7 @@ using System.Windows.Forms.Design;
 
 namespace ThemeEngineTest.Components
 {
-    public partial class Theme_Definer : Component, IDisposable
+    public partial class Theme_Definer : Component
     {
         // unexposed to the designer, a custom form will handle editing this object
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
