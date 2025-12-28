@@ -123,9 +123,9 @@
             this.targetChangingControlNameLabel.BackColor = System.Drawing.Color.White;
             this.targetChangingControlNameLabel.Location = new System.Drawing.Point(3, 8);
             this.targetChangingControlNameLabel.Name = "targetChangingControlNameLabel";
-            this.targetChangingControlNameLabel.Size = new System.Drawing.Size(103, 13);
+            this.targetChangingControlNameLabel.Size = new System.Drawing.Size(119, 13);
             this.targetChangingControlNameLabel.TabIndex = 11;
-            this.targetChangingControlNameLabel.Text = "Target Type\'s Name";
+            this.targetChangingControlNameLabel.Text = "Changing Control Name";
             // 
             // propertiesGroupBox
             // 
@@ -469,10 +469,10 @@
             this.changingControlTypeRadio.Checked = true;
             this.changingControlTypeRadio.Location = new System.Drawing.Point(6, 50);
             this.changingControlTypeRadio.Name = "changingControlTypeRadio";
-            this.changingControlTypeRadio.Size = new System.Drawing.Size(87, 17);
+            this.changingControlTypeRadio.Size = new System.Drawing.Size(80, 17);
             this.changingControlTypeRadio.TabIndex = 14;
             this.changingControlTypeRadio.TabStop = true;
-            this.changingControlTypeRadio.Text = "Type\'s Name";
+            this.changingControlTypeRadio.Text = "Type Name";
             this.changingControlTypeRadio.UseVisualStyleBackColor = false;
             // 
             // changingControlNameRadio
@@ -482,9 +482,9 @@
             this.changingControlNameRadio.BackColor = System.Drawing.Color.White;
             this.changingControlNameRadio.Location = new System.Drawing.Point(99, 50);
             this.changingControlNameRadio.Name = "changingControlNameRadio";
-            this.changingControlNameRadio.Size = new System.Drawing.Size(96, 17);
+            this.changingControlNameRadio.Size = new System.Drawing.Size(89, 17);
             this.changingControlNameRadio.TabIndex = 15;
-            this.changingControlNameRadio.Text = "Control\'s Name";
+            this.changingControlNameRadio.Text = "Control Name";
             this.changingControlNameRadio.UseVisualStyleBackColor = false;
             // 
             // cuiPanel3
