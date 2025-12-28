@@ -24,6 +24,44 @@ Create at design-time, load at run-time:
 
 <img width="1603" height="909" alt="image" src="https://github.com/user-attachments/assets/d4e2784b-519f-4303-b9cb-eda59e9fd0f8" />
 
+# 🚧 Important Notes
+> [!WARNING]
+> If you want to use a theme across Forms, the Theme's `Theme Definer` mustn't be disposed or null.
+>
+> Otherwise, you'll be applying a null theme and ThemeEngineTest will raise an exception.
+
+> [!NOTE]
+> Dynamically created controls need to have the theme applied manually after creation:
+> ```cs
+> Button newButton = new Button();
+> newButton.Size = new Size(128, 32);
+>
+> theme_Definer1.ApplyTo(newButton); // apply theme to singular control
+> Controls.Add(newButton);
+> ```
+> ... or you can add many controls and apply the theme to their `Parent`:
+> ```cs
+> Button newButton = new Button();
+> newButton.Size = new Size(128, 32);
+> 
+> Button newButton2 = new Button();
+> newButton2.Size = new Size(128, 32);
+> newButton2.Top = 36;
+> 
+> Button newButton3 = new Button();
+> newButton3.Size = new Size(128, 32);
+> newButton3.Top = 72;
+> 
+> this.Controls.Add(newButton);
+> this.Controls.Add(newButton2);
+> this.Controls.Add(newButton3);
+> 
+> theme_Definer1.ApplyTo(this); // apply to Parent, its children will update
+> ```
+
+> [!NOTE]
+> Individual control name entries will have their Type properties, if any, applied first, and then their Name properties (also if any exist).
+
 # 😼 Usage Example
 
 **1.** Drag a `Theme Definer` from your toolbox onto your Form
