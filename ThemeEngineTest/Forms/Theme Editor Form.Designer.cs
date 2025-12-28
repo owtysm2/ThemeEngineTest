@@ -31,7 +31,6 @@
             this.themeGroupBox = new System.Windows.Forms.GroupBox();
             this.importControlsFromCurrentFormButton = new System.Windows.Forms.Button();
             this.renameControlButton = new System.Windows.Forms.Button();
-            this.targetChangingControlNameLabel = new System.Windows.Forms.Label();
             this.propertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.propertiesListbox = new System.Windows.Forms.ListBox();
             this.addPropertyButton = new System.Windows.Forms.Button();
@@ -54,26 +53,33 @@
             this.bTextbox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.aTextbox = new System.Windows.Forms.TextBox();
-            this.controlNameTextbox = new System.Windows.Forms.TextBox();
             this.removeSelectedControlButton = new System.Windows.Forms.Button();
-            this.addControlNameButton = new System.Windows.Forms.Button();
             this.controlsNamesListbox = new System.Windows.Forms.ListBox();
+            this.cuiPanel3 = new CuoreUI.Controls.cuiPanel();
+            this.changingControlNameRadio = new System.Windows.Forms.RadioButton();
+            this.targetChangingControlNameLabel = new System.Windows.Forms.Label();
+            this.changingControlTypeRadio = new System.Windows.Forms.RadioButton();
+            this.addControlNameButton = new System.Windows.Forms.Button();
+            this.controlNameTextbox = new System.Windows.Forms.TextBox();
             this.themeNameTextbox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cuiPanel1 = new CuoreUI.Controls.cuiPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.cuiPanel2 = new CuoreUI.Controls.cuiPanel();
             this.button2 = new System.Windows.Forms.Button();
-            this.changingControlTypeRadio = new System.Windows.Forms.RadioButton();
-            this.changingControlNameRadio = new System.Windows.Forms.RadioButton();
-            this.cuiPanel3 = new CuoreUI.Controls.cuiPanel();
+            this.changingControlPropertiesNameTextbox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.changingControlPropertiesNameRadio = new System.Windows.Forms.RadioButton();
+            this.changingControlPropertiesTypeRadio = new System.Windows.Forms.RadioButton();
+            this.cuiPanel4 = new CuoreUI.Controls.cuiPanel();
             this.themeGroupBox.SuspendLayout();
             this.propertiesGroupBox.SuspendLayout();
             this.propertyEditorPanel.SuspendLayout();
             this.propertyColorPickerPanel.SuspendLayout();
+            this.cuiPanel3.SuspendLayout();
             this.cuiPanel1.SuspendLayout();
             this.cuiPanel2.SuspendLayout();
-            this.cuiPanel3.SuspendLayout();
+            this.cuiPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // themeGroupBox
@@ -114,24 +120,15 @@
             this.renameControlButton.TabIndex = 12;
             this.renameControlButton.Text = "Edit";
             this.renameControlButton.UseVisualStyleBackColor = true;
+            this.renameControlButton.Visible = false;
             this.renameControlButton.Click += new System.EventHandler(this.renameControlButton_Click);
-            // 
-            // targetChangingControlNameLabel
-            // 
-            this.targetChangingControlNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.targetChangingControlNameLabel.AutoSize = true;
-            this.targetChangingControlNameLabel.BackColor = System.Drawing.Color.White;
-            this.targetChangingControlNameLabel.Location = new System.Drawing.Point(3, 8);
-            this.targetChangingControlNameLabel.Name = "targetChangingControlNameLabel";
-            this.targetChangingControlNameLabel.Size = new System.Drawing.Size(119, 13);
-            this.targetChangingControlNameLabel.TabIndex = 11;
-            this.targetChangingControlNameLabel.Text = "Changing Control Name";
             // 
             // propertiesGroupBox
             // 
             this.propertiesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.propertiesGroupBox.Controls.Add(this.cuiPanel4);
             this.propertiesGroupBox.Controls.Add(this.propertiesListbox);
             this.propertiesGroupBox.Controls.Add(this.addPropertyButton);
             this.propertiesGroupBox.Controls.Add(this.removeSelectedPropertyButton);
@@ -148,9 +145,9 @@
             // 
             this.propertiesListbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.propertiesListbox.FormattingEnabled = true;
-            this.propertiesListbox.Location = new System.Drawing.Point(35, 177);
+            this.propertiesListbox.Location = new System.Drawing.Point(35, 216);
             this.propertiesListbox.Name = "propertiesListbox";
-            this.propertiesListbox.Size = new System.Drawing.Size(321, 238);
+            this.propertiesListbox.Size = new System.Drawing.Size(321, 199);
             this.propertiesListbox.TabIndex = 12;
             this.propertiesListbox.SelectedIndexChanged += new System.EventHandler(this.propertiesListbox_SelectedIndexChanged);
             // 
@@ -186,9 +183,9 @@
             this.propertyEditorPanel.Controls.Add(this.label5);
             this.propertyEditorPanel.Controls.Add(this.propertyValueTextbox);
             this.propertyEditorPanel.Controls.Add(this.propertyColorPickerPanel);
-            this.propertyEditorPanel.Location = new System.Drawing.Point(21, 31);
+            this.propertyEditorPanel.Location = new System.Drawing.Point(21, 76);
             this.propertyEditorPanel.Name = "propertyEditorPanel";
-            this.propertyEditorPanel.Size = new System.Drawing.Size(357, 157);
+            this.propertyEditorPanel.Size = new System.Drawing.Size(357, 141);
             this.propertyEditorPanel.TabIndex = 22;
             this.propertyEditorPanel.Visible = false;
             // 
@@ -201,7 +198,7 @@
             "String",
             "Color",
             "Bool"});
-            this.propertyTypeComboBox.Location = new System.Drawing.Point(14, 76);
+            this.propertyTypeComboBox.Location = new System.Drawing.Point(14, 68);
             this.propertyTypeComboBox.Name = "propertyTypeComboBox";
             this.propertyTypeComboBox.Size = new System.Drawing.Size(140, 21);
             this.propertyTypeComboBox.TabIndex = 19;
@@ -210,7 +207,7 @@
             // propertyNameTextbox
             // 
             this.propertyNameTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.propertyNameTextbox.Location = new System.Drawing.Point(14, 33);
+            this.propertyNameTextbox.Location = new System.Drawing.Point(14, 25);
             this.propertyNameTextbox.Name = "propertyNameTextbox";
             this.propertyNameTextbox.Size = new System.Drawing.Size(140, 20);
             this.propertyNameTextbox.TabIndex = 15;
@@ -218,7 +215,7 @@
             // propertyValueCheckbox
             // 
             this.propertyValueCheckbox.AutoSize = true;
-            this.propertyValueCheckbox.Location = new System.Drawing.Point(160, 36);
+            this.propertyValueCheckbox.Location = new System.Drawing.Point(160, 29);
             this.propertyValueCheckbox.Name = "propertyValueCheckbox";
             this.propertyValueCheckbox.Size = new System.Drawing.Size(15, 14);
             this.propertyValueCheckbox.TabIndex = 21;
@@ -228,7 +225,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 17);
+            this.label3.Location = new System.Drawing.Point(11, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 13);
             this.label3.TabIndex = 16;
@@ -238,7 +235,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(157, 17);
+            this.label4.Location = new System.Drawing.Point(157, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 13);
             this.label4.TabIndex = 18;
@@ -248,7 +245,7 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 60);
+            this.label5.Location = new System.Drawing.Point(11, 52);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 20;
@@ -257,7 +254,7 @@
             // propertyValueTextbox
             // 
             this.propertyValueTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.propertyValueTextbox.Location = new System.Drawing.Point(160, 33);
+            this.propertyValueTextbox.Location = new System.Drawing.Point(160, 25);
             this.propertyValueTextbox.Name = "propertyValueTextbox";
             this.propertyValueTextbox.Size = new System.Drawing.Size(175, 20);
             this.propertyValueTextbox.TabIndex = 17;
@@ -352,15 +349,6 @@
             this.aTextbox.Size = new System.Drawing.Size(39, 20);
             this.aTextbox.TabIndex = 23;
             // 
-            // controlNameTextbox
-            // 
-            this.controlNameTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.controlNameTextbox.BackColor = System.Drawing.Color.White;
-            this.controlNameTextbox.Location = new System.Drawing.Point(6, 24);
-            this.controlNameTextbox.Name = "controlNameTextbox";
-            this.controlNameTextbox.Size = new System.Drawing.Size(149, 20);
-            this.controlNameTextbox.TabIndex = 9;
-            // 
             // removeSelectedControlButton
             // 
             this.removeSelectedControlButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -371,6 +359,70 @@
             this.removeSelectedControlButton.Text = "Remove Selected";
             this.removeSelectedControlButton.UseVisualStyleBackColor = true;
             this.removeSelectedControlButton.Click += new System.EventHandler(this.removeSelectedControlButton_Click);
+            // 
+            // controlsNamesListbox
+            // 
+            this.controlsNamesListbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.controlsNamesListbox.FormattingEnabled = true;
+            this.controlsNamesListbox.Location = new System.Drawing.Point(6, 138);
+            this.controlsNamesListbox.Name = "controlsNamesListbox";
+            this.controlsNamesListbox.Size = new System.Drawing.Size(214, 277);
+            this.controlsNamesListbox.TabIndex = 5;
+            this.controlsNamesListbox.SelectedIndexChanged += new System.EventHandler(this.controlsNamesListbox_SelectedIndexChanged);
+            // 
+            // cuiPanel3
+            // 
+            this.cuiPanel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cuiPanel3.Controls.Add(this.changingControlNameRadio);
+            this.cuiPanel3.Controls.Add(this.targetChangingControlNameLabel);
+            this.cuiPanel3.Controls.Add(this.changingControlTypeRadio);
+            this.cuiPanel3.Controls.Add(this.addControlNameButton);
+            this.cuiPanel3.Controls.Add(this.controlNameTextbox);
+            this.cuiPanel3.Location = new System.Drawing.Point(6, 58);
+            this.cuiPanel3.Name = "cuiPanel3";
+            this.cuiPanel3.OutlineThickness = 1F;
+            this.cuiPanel3.PanelColor = System.Drawing.Color.White;
+            this.cuiPanel3.PanelOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.cuiPanel3.Rounding = new System.Windows.Forms.Padding(8);
+            this.cuiPanel3.Size = new System.Drawing.Size(214, 74);
+            this.cuiPanel3.TabIndex = 25;
+            // 
+            // changingControlNameRadio
+            // 
+            this.changingControlNameRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.changingControlNameRadio.AutoSize = true;
+            this.changingControlNameRadio.BackColor = System.Drawing.Color.White;
+            this.changingControlNameRadio.Location = new System.Drawing.Point(99, 50);
+            this.changingControlNameRadio.Name = "changingControlNameRadio";
+            this.changingControlNameRadio.Size = new System.Drawing.Size(89, 17);
+            this.changingControlNameRadio.TabIndex = 15;
+            this.changingControlNameRadio.Text = "Control Name";
+            this.changingControlNameRadio.UseVisualStyleBackColor = false;
+            // 
+            // targetChangingControlNameLabel
+            // 
+            this.targetChangingControlNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.targetChangingControlNameLabel.AutoSize = true;
+            this.targetChangingControlNameLabel.BackColor = System.Drawing.Color.White;
+            this.targetChangingControlNameLabel.Location = new System.Drawing.Point(3, 8);
+            this.targetChangingControlNameLabel.Name = "targetChangingControlNameLabel";
+            this.targetChangingControlNameLabel.Size = new System.Drawing.Size(119, 13);
+            this.targetChangingControlNameLabel.TabIndex = 11;
+            this.targetChangingControlNameLabel.Text = "Changing Control Name";
+            // 
+            // changingControlTypeRadio
+            // 
+            this.changingControlTypeRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.changingControlTypeRadio.AutoSize = true;
+            this.changingControlTypeRadio.BackColor = System.Drawing.Color.White;
+            this.changingControlTypeRadio.Checked = true;
+            this.changingControlTypeRadio.Location = new System.Drawing.Point(6, 50);
+            this.changingControlTypeRadio.Name = "changingControlTypeRadio";
+            this.changingControlTypeRadio.Size = new System.Drawing.Size(80, 17);
+            this.changingControlTypeRadio.TabIndex = 14;
+            this.changingControlTypeRadio.TabStop = true;
+            this.changingControlTypeRadio.Text = "Type Name";
+            this.changingControlTypeRadio.UseVisualStyleBackColor = false;
             // 
             // addControlNameButton
             // 
@@ -384,15 +436,14 @@
             this.addControlNameButton.UseVisualStyleBackColor = false;
             this.addControlNameButton.Click += new System.EventHandler(this.addControlNameButton_Click);
             // 
-            // controlsNamesListbox
+            // controlNameTextbox
             // 
-            this.controlsNamesListbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.controlsNamesListbox.FormattingEnabled = true;
-            this.controlsNamesListbox.Location = new System.Drawing.Point(6, 138);
-            this.controlsNamesListbox.Name = "controlsNamesListbox";
-            this.controlsNamesListbox.Size = new System.Drawing.Size(214, 277);
-            this.controlsNamesListbox.TabIndex = 5;
-            this.controlsNamesListbox.SelectedIndexChanged += new System.EventHandler(this.controlsNamesListbox_SelectedIndexChanged);
+            this.controlNameTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.controlNameTextbox.BackColor = System.Drawing.Color.White;
+            this.controlNameTextbox.Location = new System.Drawing.Point(6, 24);
+            this.controlNameTextbox.Name = "controlNameTextbox";
+            this.controlNameTextbox.Size = new System.Drawing.Size(149, 20);
+            this.controlNameTextbox.TabIndex = 9;
             // 
             // themeNameTextbox
             // 
@@ -461,48 +512,70 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // changingControlTypeRadio
+            // changingControlPropertiesNameTextbox
             // 
-            this.changingControlTypeRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.changingControlTypeRadio.AutoSize = true;
-            this.changingControlTypeRadio.BackColor = System.Drawing.Color.White;
-            this.changingControlTypeRadio.Checked = true;
-            this.changingControlTypeRadio.Location = new System.Drawing.Point(6, 50);
-            this.changingControlTypeRadio.Name = "changingControlTypeRadio";
-            this.changingControlTypeRadio.Size = new System.Drawing.Size(80, 17);
-            this.changingControlTypeRadio.TabIndex = 14;
-            this.changingControlTypeRadio.TabStop = true;
-            this.changingControlTypeRadio.Text = "Type Name";
-            this.changingControlTypeRadio.UseVisualStyleBackColor = false;
+            this.changingControlPropertiesNameTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.changingControlPropertiesNameTextbox.BackColor = System.Drawing.Color.White;
+            this.changingControlPropertiesNameTextbox.Location = new System.Drawing.Point(9, 23);
+            this.changingControlPropertiesNameTextbox.Name = "changingControlPropertiesNameTextbox";
+            this.changingControlPropertiesNameTextbox.Size = new System.Drawing.Size(140, 20);
+            this.changingControlPropertiesNameTextbox.TabIndex = 22;
+            this.changingControlPropertiesNameTextbox.TextChanged += new System.EventHandler(this.changingControlPropertiesNameTextbox_TextChanged);
             // 
-            // changingControlNameRadio
+            // label1
             // 
-            this.changingControlNameRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.changingControlNameRadio.AutoSize = true;
-            this.changingControlNameRadio.BackColor = System.Drawing.Color.White;
-            this.changingControlNameRadio.Location = new System.Drawing.Point(99, 50);
-            this.changingControlNameRadio.Name = "changingControlNameRadio";
-            this.changingControlNameRadio.Size = new System.Drawing.Size(89, 17);
-            this.changingControlNameRadio.TabIndex = 15;
-            this.changingControlNameRadio.Text = "Control Name";
-            this.changingControlNameRadio.UseVisualStyleBackColor = false;
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(6, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(140, 13);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Edit Changing Control Name";
             // 
-            // cuiPanel3
+            // changingControlPropertiesNameRadio
             // 
-            this.cuiPanel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.cuiPanel3.Controls.Add(this.changingControlNameRadio);
-            this.cuiPanel3.Controls.Add(this.targetChangingControlNameLabel);
-            this.cuiPanel3.Controls.Add(this.changingControlTypeRadio);
-            this.cuiPanel3.Controls.Add(this.addControlNameButton);
-            this.cuiPanel3.Controls.Add(this.controlNameTextbox);
-            this.cuiPanel3.Location = new System.Drawing.Point(6, 58);
-            this.cuiPanel3.Name = "cuiPanel3";
-            this.cuiPanel3.OutlineThickness = 1F;
-            this.cuiPanel3.PanelColor = System.Drawing.Color.White;
-            this.cuiPanel3.PanelOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.cuiPanel3.Rounding = new System.Windows.Forms.Padding(8);
-            this.cuiPanel3.Size = new System.Drawing.Size(214, 74);
-            this.cuiPanel3.TabIndex = 25;
+            this.changingControlPropertiesNameRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.changingControlPropertiesNameRadio.AutoSize = true;
+            this.changingControlPropertiesNameRadio.BackColor = System.Drawing.Color.White;
+            this.changingControlPropertiesNameRadio.Location = new System.Drawing.Point(254, 24);
+            this.changingControlPropertiesNameRadio.Name = "changingControlPropertiesNameRadio";
+            this.changingControlPropertiesNameRadio.Size = new System.Drawing.Size(96, 17);
+            this.changingControlPropertiesNameRadio.TabIndex = 42;
+            this.changingControlPropertiesNameRadio.Text = "Control\'s Name";
+            this.changingControlPropertiesNameRadio.UseVisualStyleBackColor = false;
+            this.changingControlPropertiesNameRadio.CheckedChanged += new System.EventHandler(this.changingControlPropertiesNameRadio_CheckedChanged);
+            // 
+            // changingControlPropertiesTypeRadio
+            // 
+            this.changingControlPropertiesTypeRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.changingControlPropertiesTypeRadio.AutoSize = true;
+            this.changingControlPropertiesTypeRadio.BackColor = System.Drawing.Color.White;
+            this.changingControlPropertiesTypeRadio.Checked = true;
+            this.changingControlPropertiesTypeRadio.Location = new System.Drawing.Point(161, 24);
+            this.changingControlPropertiesTypeRadio.Name = "changingControlPropertiesTypeRadio";
+            this.changingControlPropertiesTypeRadio.Size = new System.Drawing.Size(87, 17);
+            this.changingControlPropertiesTypeRadio.TabIndex = 41;
+            this.changingControlPropertiesTypeRadio.TabStop = true;
+            this.changingControlPropertiesTypeRadio.Text = "Type\'s Name";
+            this.changingControlPropertiesTypeRadio.UseVisualStyleBackColor = false;
+            this.changingControlPropertiesTypeRadio.CheckedChanged += new System.EventHandler(this.changingControlPropertiesTypeRadio_CheckedChanged);
+            // 
+            // cuiPanel4
+            // 
+            this.cuiPanel4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cuiPanel4.Controls.Add(this.changingControlPropertiesNameRadio);
+            this.cuiPanel4.Controls.Add(this.label1);
+            this.cuiPanel4.Controls.Add(this.changingControlPropertiesNameTextbox);
+            this.cuiPanel4.Controls.Add(this.changingControlPropertiesTypeRadio);
+            this.cuiPanel4.Location = new System.Drawing.Point(14, 21);
+            this.cuiPanel4.Name = "cuiPanel4";
+            this.cuiPanel4.OutlineThickness = 1F;
+            this.cuiPanel4.PanelColor = System.Drawing.Color.White;
+            this.cuiPanel4.PanelOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.cuiPanel4.Rounding = new System.Windows.Forms.Padding(8);
+            this.cuiPanel4.Size = new System.Drawing.Size(357, 51);
+            this.cuiPanel4.TabIndex = 26;
             // 
             // Theme_Editor_Form
             // 
@@ -524,10 +597,12 @@
             this.propertyEditorPanel.PerformLayout();
             this.propertyColorPickerPanel.ResumeLayout(false);
             this.propertyColorPickerPanel.PerformLayout();
-            this.cuiPanel1.ResumeLayout(false);
-            this.cuiPanel2.ResumeLayout(false);
             this.cuiPanel3.ResumeLayout(false);
             this.cuiPanel3.PerformLayout();
+            this.cuiPanel1.ResumeLayout(false);
+            this.cuiPanel2.ResumeLayout(false);
+            this.cuiPanel4.ResumeLayout(false);
+            this.cuiPanel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -573,5 +648,10 @@
         private System.Windows.Forms.RadioButton changingControlNameRadio;
         private System.Windows.Forms.RadioButton changingControlTypeRadio;
         private CuoreUI.Controls.cuiPanel cuiPanel3;
+        private System.Windows.Forms.TextBox changingControlPropertiesNameTextbox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton changingControlPropertiesNameRadio;
+        private System.Windows.Forms.RadioButton changingControlPropertiesTypeRadio;
+        private CuoreUI.Controls.cuiPanel cuiPanel4;
     }
 }

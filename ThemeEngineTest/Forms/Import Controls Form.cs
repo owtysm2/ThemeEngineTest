@@ -6,36 +6,72 @@ namespace ThemeEngineTest.Forms
 {
     public partial class Import_Controls_Form : Form
     {
-        internal List<string> ControlsToImportNamesResult = new List<string>();
+        internal List<Custom_Definitions.ChangingControl> ChangingControlsToImportResult = new List<Custom_Definitions.ChangingControl>();
+        internal List<Control> ImportableControlsList = new List<Control>();
+
+        private enum NameOrTypeEnum
+        { 
+            Names,
+            Types,
+        }
+
+        void PopulateListboxWith(NameOrTypeEnum namesOrTypes)
+        {
+            importedControlsListbox.Items.Clear();
+            switch (namesOrTypes)
+            {
+                case NameOrTypeEnum.Names:
+                    foreach (Control control in ImportableControlsList)
+                    {
+                        importedControlsListbox.Items.Add(control.Site?.Name ?? control.Name);
+                    }
+                    break;
+                case NameOrTypeEnum.Types:
+                    foreach (Control control in ImportableControlsList)
+                    {
+                        string typeName = control.GetType().Name;
+                        if (importedControlsListbox.Items.Contains(typeName))
+                        {
+                            continue;
+                        }
+
+                        importedControlsListbox.Items.Add(typeName);
+                    }
+                    break;
+            }
+        }
 
         public Import_Controls_Form(Control.ControlCollection importableControls)
         {
             InitializeComponent();
-            RecursiveAddToListbox(importableControls);
+            RecursiveAddToImportableList(importableControls);
 
-            void RecursiveAddToListbox(Control.ControlCollection parentControlCollection)
+            void RecursiveAddToImportableList(Control.ControlCollection parentControlCollection)
             {
                 foreach (Control control in parentControlCollection)
                 {
-                    importedControlsListbox.Items.Add(
-                        control.Site?.Name ?? control.Name,
-                        true
-                    );
-
+                    ImportableControlsList.Add(control);
 
                     if (control.Controls.Count > 0)
                     {
-                        RecursiveAddToListbox(control.Controls);
+                        RecursiveAddToImportableList(control.Controls);
                     }
                 }
             }
+
+            PopulateListboxWith(NameOrTypeEnum.Types);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             foreach (var item in importedControlsListbox.CheckedItems)
             {
-                ControlsToImportNamesResult.Add(item.ToString());
+                ChangingControlsToImportResult.Add(
+                    new Custom_Definitions.ChangingControl()
+                    {
+                        ControlName = item.ToString(),
+                        IsTypeTemplate = changingControlTypeRadio.Checked
+                    });
             }
 
             DialogResult = DialogResult.OK;
@@ -61,6 +97,22 @@ namespace ThemeEngineTest.Forms
             for (int i = 0; i < importedControlsListbox.Items.Count; i++)
             {
                 importedControlsListbox.SetItemChecked(i, false);
+            }
+        }
+
+        private void changingControlNameRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (changingControlNameRadio.Checked)
+            {
+                PopulateListboxWith(NameOrTypeEnum.Names);
+            }
+        }
+
+        private void changingControlTypeRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (changingControlTypeRadio.Checked)
+            {
+                PopulateListboxWith(NameOrTypeEnum.Types);
             }
         }
     }

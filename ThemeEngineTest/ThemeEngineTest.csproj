@@ -58,6 +58,12 @@
     <Compile Include="Forms\Import Controls Form.Designer.cs">
       <DependentUpon>Import Controls Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Import Properties From Type Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Import Properties From Type Form.Designer.cs">
+      <DependentUpon>Import Properties From Type Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Internal Theme Manager.cs" />
     <Compile Include="Custom Definitions.cs" />
     <Compile Include="Forms\Property Creator Form.cs">
@@ -89,6 +95,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\Import Controls Form.resx">
       <DependentUpon>Import Controls Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Import Properties From Type Form.resx">
+      <DependentUpon>Import Properties From Type Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Property Creator Form.resx">
       <DependentUpon>Property Creator Form.cs</DependentUpon>

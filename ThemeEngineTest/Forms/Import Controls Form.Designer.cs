@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Import_Controls_Form));
-            this.label1 = new System.Windows.Forms.Label();
-            this.formNameLabel = new System.Windows.Forms.Label();
             this.importedControlsListbox = new System.Windows.Forms.CheckedListBox();
             this.cuiPanel2 = new CuoreUI.Controls.cuiPanel();
             this.button2 = new System.Windows.Forms.Button();
@@ -39,35 +37,18 @@
             this.deselectAllButton = new System.Windows.Forms.Button();
             this.selectAllButton = new System.Windows.Forms.Button();
             this.filterButton = new CuoreUI.Controls.cuiButton();
+            this.changingControlNameRadio = new System.Windows.Forms.RadioButton();
+            this.changingControlTypeRadio = new System.Windows.Forms.RadioButton();
             this.cuiPanel2.SuspendLayout();
             this.cuiPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Importing from:";
-            // 
-            // formNameLabel
-            // 
-            this.formNameLabel.AutoSize = true;
-            this.formNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.formNameLabel.Location = new System.Drawing.Point(83, 12);
-            this.formNameLabel.Name = "formNameLabel";
-            this.formNameLabel.Size = new System.Drawing.Size(43, 16);
-            this.formNameLabel.TabIndex = 1;
-            this.formNameLabel.Text = "Form1";
             // 
             // importedControlsListbox
             // 
             this.importedControlsListbox.FormattingEnabled = true;
             this.importedControlsListbox.Location = new System.Drawing.Point(12, 69);
             this.importedControlsListbox.Name = "importedControlsListbox";
-            this.importedControlsListbox.Size = new System.Drawing.Size(220, 244);
+            this.importedControlsListbox.Size = new System.Drawing.Size(220, 229);
             this.importedControlsListbox.TabIndex = 2;
             // 
             // cuiPanel2
@@ -183,19 +164,46 @@
             this.filterButton.TextOffset = new System.Drawing.Point(0, 0);
             this.filterButton.Visible = false;
             // 
+            // changingControlNameRadio
+            // 
+            this.changingControlNameRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.changingControlNameRadio.AutoSize = true;
+            this.changingControlNameRadio.Location = new System.Drawing.Point(124, 309);
+            this.changingControlNameRadio.Name = "changingControlNameRadio";
+            this.changingControlNameRadio.Size = new System.Drawing.Size(90, 17);
+            this.changingControlNameRadio.TabIndex = 40;
+            this.changingControlNameRadio.Text = "Import Names";
+            this.changingControlNameRadio.UseVisualStyleBackColor = false;
+            this.changingControlNameRadio.CheckedChanged += new System.EventHandler(this.changingControlNameRadio_CheckedChanged);
+            // 
+            // changingControlTypeRadio
+            // 
+            this.changingControlTypeRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.changingControlTypeRadio.AutoSize = true;
+            this.changingControlTypeRadio.Checked = true;
+            this.changingControlTypeRadio.Cursor = System.Windows.Forms.Cursors.Default;
+            this.changingControlTypeRadio.Location = new System.Drawing.Point(31, 309);
+            this.changingControlTypeRadio.Name = "changingControlTypeRadio";
+            this.changingControlTypeRadio.Size = new System.Drawing.Size(86, 17);
+            this.changingControlTypeRadio.TabIndex = 39;
+            this.changingControlTypeRadio.TabStop = true;
+            this.changingControlTypeRadio.Text = "Import Types";
+            this.changingControlTypeRadio.UseVisualStyleBackColor = false;
+            this.changingControlTypeRadio.CheckedChanged += new System.EventHandler(this.changingControlTypeRadio_CheckedChanged);
+            // 
             // Import_Controls_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(244, 384);
+            this.Controls.Add(this.changingControlNameRadio);
+            this.Controls.Add(this.changingControlTypeRadio);
             this.Controls.Add(this.filterButton);
             this.Controls.Add(this.selectAllButton);
             this.Controls.Add(this.deselectAllButton);
             this.Controls.Add(this.cuiPanel2);
             this.Controls.Add(this.cuiPanel1);
             this.Controls.Add(this.importedControlsListbox);
-            this.Controls.Add(this.formNameLabel);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Import_Controls_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -208,9 +216,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label formNameLabel;
         private System.Windows.Forms.CheckedListBox importedControlsListbox;
         private CuoreUI.Controls.cuiPanel cuiPanel2;
         private System.Windows.Forms.Button button2;
@@ -219,5 +224,7 @@
         private System.Windows.Forms.Button deselectAllButton;
         private System.Windows.Forms.Button selectAllButton;
         private CuoreUI.Controls.cuiButton filterButton;
+        private System.Windows.Forms.RadioButton changingControlNameRadio;
+        private System.Windows.Forms.RadioButton changingControlTypeRadio;
     }
 }

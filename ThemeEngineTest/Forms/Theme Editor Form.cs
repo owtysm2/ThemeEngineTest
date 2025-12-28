@@ -242,8 +242,9 @@ namespace ThemeEngineTest.Forms
                 Custom_Definitions.ChangingControl currentChangingControl = GetSelectedChangingControl();
                 if (currentChangingControl != null)
                 {
-                    //changingControlTypeRadio.Checked = currentChangingControl.IsTypeTemplate;
-                    //changingControlNameRadio.Checked = !currentChangingControl.IsTypeTemplate;
+                    changingControlPropertiesTypeRadio.Checked = currentChangingControl.IsTypeTemplate;
+                    changingControlPropertiesNameRadio.Checked = !currentChangingControl.IsTypeTemplate;
+                    changingControlPropertiesNameTextbox.Text = currentChangingControl.ControlName;
 
                     // populate the properties listbox based on the selected control's properties
                     propertiesListbox.Items.Clear();
@@ -294,12 +295,84 @@ namespace ThemeEngineTest.Forms
             Close();
         }
 
+
+        BindingList<Type> typesInFormOpenedInDesigner = null;
         private void addPropertyButton_Click(object sender, EventArgs e)
         {
             Custom_Definitions.ChangingControl currentChangingControl = GetSelectedChangingControl();
+
+            Type typeWhichCanBeUsedToGetPropertiesAutomatically = null;
+            void CheckIfPropertiesCanBeRetrievedAutomatically()
+            {
+                if (referenceToFormOpenedInDesigner != null)
+                {
+                    if (typesInFormOpenedInDesigner == null)
+                    {
+                        void RecursiveAddToTypesList(Control.ControlCollection parentControlCollection)
+                        {
+                            foreach (Control control in parentControlCollection)
+                            {
+                                typesInFormOpenedInDesigner.Add(control.GetType());
+
+                                if (control.Controls.Count > 0)
+                                {
+                                    RecursiveAddToTypesList(control.Controls);
+                                }
+                            }
+                        }
+
+                        // populate list with available types in the form opened in the designer
+                        typesInFormOpenedInDesigner = new BindingList<Type>();
+                        RecursiveAddToTypesList(referenceToFormOpenedInDesigner.Controls);
+                    }
+
+                    if (currentChangingControl != null && currentChangingControl.IsTypeTemplate && typesInFormOpenedInDesigner != null)
+                    {
+                        foreach (Type type in typesInFormOpenedInDesigner)
+                        {
+                            if (type.Name == currentChangingControl.ControlName)
+                            {
+                                typeWhichCanBeUsedToGetPropertiesAutomatically = type;
+                            }
+                        }
+                    }
+                }
+            }
+
             if (currentChangingControl != null)
             {
+                CheckIfPropertiesCanBeRetrievedAutomatically();
+                bool canAutoRetrieveProperties = typeWhichCanBeUsedToGetPropertiesAutomatically != null;
+                if (canAutoRetrieveProperties)
+                {
+                    using (Import_Properties_From_Type_Form propertiesImporterForm = new Import_Properties_From_Type_Form(propertiesListbox.Items, typeWhichCanBeUsedToGetPropertiesAutomatically))
+                    {
+                        if (propertiesImporterForm.ShowDialog() == DialogResult.OK)
+                        {
+                            // clone, since currentChangingControl is not the owner of propertiesImporterForm.CreatedChangingProperties
+                            // and adding them directly could cause problems
+                            foreach (Custom_Definitions.ChangingProperty changingProperty in propertiesImporterForm.SelectedChangingProperties)
+                            {
+                                // "propertiesImporterForm"'s constructor makes sure there are
+                                // no duplicates, so no need to do the listbox items check here
+                                currentChangingControl.ChangingProperties.Add(
+                                    new Custom_Definitions.ChangingProperty()
+                                    {
+                                        PropertyName = changingProperty.PropertyName,
+                                        PropertyType = changingProperty.PropertyType,
+                                        PropertyValue = changingProperty.PropertyValue
+                                    });
+                                propertiesListbox.Items.Add(changingProperty.PropertyName);
+                            }
+                        }
+                    }
+
+                    // dont show the property creator if the easier-to-use picker form had been shown
+                    return;
+                }
+
                 Property_Creator_Form propertyCreatorForm = new Property_Creator_Form();
+
                 if (propertyCreatorForm.ShowDialog() == DialogResult.OK)
                 {
                     currentChangingControl.ChangingProperties.Add(propertyCreatorForm.CreatedProperty);
@@ -475,25 +548,82 @@ namespace ThemeEngineTest.Forms
                     {
                         void ProcessImportResult()
                         {
-                            foreach (string c in importControlsForm.ControlsToImportNamesResult)
+                            foreach (Custom_Definitions.ChangingControl newChangingControl in importControlsForm.ChangingControlsToImportResult)
                             {
                                 // avoid duplicates
-                                if (controlsNamesListbox.Items.Contains(c))
+                                if (controlsNamesListbox.Items.Contains(newChangingControl))
                                 {
                                     continue;
                                 }
 
-                                controlsNamesListbox.Items.Add(c);
-                                EditedTheme.ChangingControls.Add(new Custom_Definitions.ChangingControl()
-                                {
-                                    ControlName = c,
-                                });
+                                controlsNamesListbox.Items.Add(newChangingControl.ControlName);
+                                EditedTheme.ChangingControls.Add(newChangingControl);
                             }
                         }
 
                         ProcessImportResult();
                     }
                 }
+            }
+        }
+
+        private void changingControlPropertiesTypeRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (changingControlPropertiesTypeRadio.Checked)
+            {
+                Custom_Definitions.ChangingControl currentChangingControl = GetSelectedChangingControl();
+                if (currentChangingControl != null)
+                {
+                    currentChangingControl.IsTypeTemplate = true;
+                }
+            }
+        }
+
+        private void changingControlPropertiesNameRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (changingControlPropertiesNameRadio.Checked)
+            {
+                Custom_Definitions.ChangingControl currentChangingControl = GetSelectedChangingControl();
+                if (currentChangingControl != null)
+                {
+                    currentChangingControl.IsTypeTemplate = false;
+                }
+            }
+        }
+
+        private void changingControlPropertiesNameTextbox_TextChanged(object sender, EventArgs e)
+        {
+            Custom_Definitions.ChangingControl currentChangingControl = GetSelectedChangingControl();
+            if (currentChangingControl != null)
+            {
+                string targetText = changingControlPropertiesNameTextbox.Text.Trim();
+                if (targetText == string.Empty)
+                {
+                    // if user input is empty,
+                    // go back to the previous name (which was valid)
+                    changingControlPropertiesNameTextbox.Text = currentChangingControl.ControlName;
+                    return;
+                }
+
+                // remove old name from the listbox
+                int listboxIndex = controlsNamesListbox.Items.IndexOf(currentChangingControl.ControlName);
+                controlsNamesListbox.Items.RemoveAt(listboxIndex);
+
+                // update changing control's name
+                currentChangingControl.ControlName = targetText;
+
+                // update listbox with the new name at the index of the old name
+                controlsNamesListbox.Items.Insert(listboxIndex, currentChangingControl.ControlName);
+
+                // re-select the now-renamed control
+                controlsNamesListbox.SelectedItem = currentChangingControl.ControlName;
+
+                // re-focus on the textbox
+                changingControlPropertiesNameTextbox.Focus();
+                // also remove selection as re-focusing selects all text
+                changingControlPropertiesNameTextbox.SelectionLength = 0;
+                // .. and move the selection to the front
+                changingControlPropertiesNameTextbox.SelectionStart = changingControlPropertiesNameTextbox.Text.Length;
             }
         }
     }
