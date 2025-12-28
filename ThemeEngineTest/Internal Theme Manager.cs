@@ -52,16 +52,16 @@ namespace ThemeEngineTest
             return null;
         }
 
-        public static void ApplyThemeToChildren(string themeName, Control targetControlOrForm)
+        public static void ApplyThemeToChildrenAndSelf(string themeName, Control targetControlOrForm)
         {
             Custom_Definitions.Theme foundTheme = GetThemeFromName(themeName);
             if (foundTheme != null)
             {
-                ApplyThemeToChildren(foundTheme, targetControlOrForm);
+                ApplyThemeToChildrenAndSelf(foundTheme, targetControlOrForm);
             }
         }
 
-        public static void ApplyThemeToChildren(Custom_Definitions.Theme theme, Control targetControlOrForm)
+        public static void ApplyThemeToChildrenAndSelf(Custom_Definitions.Theme theme, Control targetControlOrForm)
         {
             void SetPropertyValueWithReflection(Control targetControl, string propertyName, object newValue)
             {

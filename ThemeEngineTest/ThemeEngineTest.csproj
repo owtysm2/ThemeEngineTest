@@ -52,6 +52,7 @@
     <Compile Include="Components\Theme Definer Component.Designer.cs">
       <DependentUpon>Theme Definer Component.cs</DependentUpon>
     </Compile>
+    <Compile Include="API\API.cs" />
     <Compile Include="Forms\Import Controls Form.cs">
       <SubType>Form</SubType>
     </Compile>

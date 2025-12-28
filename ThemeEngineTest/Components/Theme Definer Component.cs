@@ -32,7 +32,7 @@ namespace ThemeEngineTest.Components
 
         public void ApplyTo(Control targetFormOrControl)
         {
-            InternalThemeManager.ApplyThemeToChildren(ThemeObject, targetFormOrControl);
+            InternalThemeManager.ApplyThemeToChildrenAndSelf(ThemeObject, targetFormOrControl);
         }
 
         public Theme_Definer()
