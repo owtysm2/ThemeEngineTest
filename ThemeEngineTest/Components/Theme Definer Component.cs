@@ -30,15 +30,14 @@ namespace ThemeEngineTest.Components
         [DisplayName("Click to Clone Theme")]
         public EmptyClass Clone { get; }
 
-        public void ApplyToForm(Form targetForm)
+        public void ApplyTo(Control targetFormOrControl)
         {
-            InternalThemeManager.ApplyThemeToChildren(ThemeObject, targetForm);
+            InternalThemeManager.ApplyThemeToChildren(ThemeObject, targetFormOrControl);
         }
 
         public Theme_Definer()
         {
             InitializeComponent();
-
             InternalThemeManager.RegisterTheme(this);
         }
     }
