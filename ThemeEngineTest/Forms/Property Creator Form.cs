@@ -7,6 +7,7 @@ namespace ThemeEngineTest.Forms
     public partial class Property_Creator_Form : Form
     {
         public Custom_Definitions.ChangingProperty CreatedProperty;
+        private int alpha = 255;
 
         public Property_Creator_Form()
         {
@@ -33,7 +34,7 @@ namespace ThemeEngineTest.Forms
                         }
                     }
 
-                    updateTextbox(aTextbox, propertyValueColorPicker.Content.A.ToString());
+                    updateTextbox(aTextbox, alpha.ToString());
                     updateTextbox(rTextbox, propertyValueColorPicker.Content.R.ToString());
                     updateTextbox(gTextbox, propertyValueColorPicker.Content.G.ToString());
                     updateTextbox(bTextbox, propertyValueColorPicker.Content.B.ToString());
@@ -58,6 +59,7 @@ namespace ThemeEngineTest.Forms
                             switch (num)
                             {
                                 case 0: // A
+                                    alpha = newValue;
                                     c = Color.FromArgb(newValue, c);
                                     break;
                                 case 1: // R
@@ -110,7 +112,7 @@ namespace ThemeEngineTest.Forms
                     value = propertyValueTextbox.Text;
                     break;
                 case Custom_Definitions.PropertyType.Color:
-                    value = propertyValueColorPicker.Content;
+                    value = Color.FromArgb(alpha, propertyValueColorPicker.Content);
                     break;
                 case Custom_Definitions.PropertyType.Bool:
                     value = propertyValueCheckbox.Checked;

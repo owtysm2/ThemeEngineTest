@@ -66,11 +66,11 @@
     <Compile Include="Forms\Property Creator Form.Designer.cs">
       <DependentUpon>Property Creator Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Renamer Form.cs">
+    <Compile Include="Forms\Control Editor Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Renamer Form.Designer.cs">
-      <DependentUpon>Renamer Form.cs</DependentUpon>
+    <Compile Include="Forms\Control Editor Form.Designer.cs">
+      <DependentUpon>Control Editor Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\VisualStudio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,8 +93,8 @@
     <EmbeddedResource Include="Forms\Property Creator Form.resx">
       <DependentUpon>Property Creator Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Renamer Form.resx">
-      <DependentUpon>Renamer Form.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Control Editor Form.resx">
+      <DependentUpon>Control Editor Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Theme Editor Form.resx">
       <DependentUpon>Theme Editor Form.cs</DependentUpon>

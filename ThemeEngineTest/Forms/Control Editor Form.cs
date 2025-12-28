@@ -3,14 +3,20 @@ using System.Windows.Forms;
 
 namespace ThemeEngineTest.Forms
 {
-    public partial class Renamer_Form : Form
+    public partial class Control_Editor_Form : Form
     {
         public string NewName;
+        public bool IsTypeTemplate => changingControlTypeRadio.Checked;
 
-        public Renamer_Form(string oldName)
+        public Control_Editor_Form(string oldName, bool oldIsTypeTemplate)
         {
             InitializeComponent();
+
             oldTextbox.Text = oldName;
+            newTextbox.Text = oldName;
+
+            changingControlTypeRadio.Checked = oldIsTypeTemplate;
+            changingControlNameRadio.Checked = !oldIsTypeTemplate;
         }
 
         private void button1_Click(object sender, EventArgs e)

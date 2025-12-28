@@ -96,19 +96,28 @@ namespace ThemeEngineTest
             {
                 foreach (Control c in targetControl.Controls)
                 {
-                    IEnumerable<Custom_Definitions.ChangingControl> filteredControls = theme.ChangingControls.Where(cc => cc.ControlName == c.Name);
-                    if (filteredControls.Count() > 0)
-                    {
-                        Custom_Definitions.ChangingControl firstMatch = filteredControls.First();
+                    IEnumerable<Custom_Definitions.ChangingControl> changingControlsMatchingName = theme.ChangingControls.Where(cc => (!cc.IsTypeTemplate && cc.ControlName == c.Name));
+                    IEnumerable<Custom_Definitions.ChangingControl> changingControlsTemplated = theme.ChangingControls.Where(cc => cc.IsTypeTemplate && cc.ControlName == c.GetType().Name);
 
-                        foreach (Custom_Definitions.ChangingProperty prop in firstMatch.ChangingProperties)
+                    // template first, name matches will override the template later
+                    if (changingControlsTemplated.Count() > 0)
+                    {
+                        Custom_Definitions.ChangingControl template = changingControlsTemplated.First();
+
+                        foreach (Custom_Definitions.ChangingProperty prop in template.ChangingProperties)
                         {
                             SetPropertyValueWithReflection(c, prop.PropertyName, prop.PropertyValue);
                         }
                     }
-                    else
+
+                    if (changingControlsMatchingName.Count() > 0)
                     {
-                        //MessageBox.Show("match NOT found");
+                        Custom_Definitions.ChangingControl retrievedChangingControl = changingControlsMatchingName.First();
+
+                        foreach (Custom_Definitions.ChangingProperty prop in retrievedChangingControl.ChangingProperties)
+                        {
+                            SetPropertyValueWithReflection(c, prop.PropertyName, prop.PropertyValue);
+                        }
                     }
 
                     if (c.Controls.Count == 0)

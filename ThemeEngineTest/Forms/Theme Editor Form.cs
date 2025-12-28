@@ -68,6 +68,11 @@ namespace ThemeEngineTest.Forms
             {
                 propertyValueCheckbox.CheckedChanged += (e, s) =>
                 {
+                    if (preventPropertyUpdates)
+                    {
+                        return;
+                    }
+
                     // update current selected property's value to the newly selected color
                     Custom_Definitions.ChangingProperty currentChangingProperty = GetSelectedChangingProperty();
                     if (currentChangingProperty != null)
@@ -81,6 +86,11 @@ namespace ThemeEngineTest.Forms
             {
                 propertyValueTextbox.TextChanged += (e, s) =>
                 {
+                    if (preventPropertyUpdates)
+                    {
+                        return;
+                    }
+
                     // update current selected property's value to the newly selected color
                     Custom_Definitions.ChangingProperty currentChangingProperty = GetSelectedChangingProperty();
                     if (currentChangingProperty != null)
@@ -119,6 +129,13 @@ namespace ThemeEngineTest.Forms
 
                             // re-select the now-renamed property
                             propertiesListbox.SelectedItem = currentChangingProperty.PropertyName;
+
+                            // re-focus on the textbox
+                            propertyNameTextbox.Focus();
+                            // also remove selection as re-focusing selects all text
+                            propertyNameTextbox.SelectionLength = 0;
+                            // .. and move the selection to the front
+                            propertyNameTextbox.SelectionStart = propertyNameTextbox.Text.Length;
                         }
                     }
                 };
@@ -133,6 +150,11 @@ namespace ThemeEngineTest.Forms
 
                 propertyValueColorPicker.ContentChanged += (e, s) =>
                 {
+                    if (preventPropertyUpdates)
+                    {
+                        return;
+                    }
+
                     void updateTextbox(TextBox tb, string newValue)
                     {
                         if (tb.Text != newValue)
@@ -141,16 +163,16 @@ namespace ThemeEngineTest.Forms
                         }
                     }
 
-                    updateTextbox(aTextbox, propertyValueColorPicker.Content.A.ToString());
-                    updateTextbox(rTextbox, propertyValueColorPicker.Content.R.ToString());
-                    updateTextbox(gTextbox, propertyValueColorPicker.Content.G.ToString());
-                    updateTextbox(bTextbox, propertyValueColorPicker.Content.B.ToString());
-
                     // update current selected property's value to the newly selected color
                     Custom_Definitions.ChangingProperty currentChangingProperty = GetSelectedChangingProperty();
                     if (currentChangingProperty != null)
                     {
-                        currentChangingProperty.PropertyValue = propertyValueColorPicker.Content;
+                        updateTextbox(aTextbox, propertyValueColorPicker.Content.A.ToString());
+                        updateTextbox(rTextbox, propertyValueColorPicker.Content.R.ToString());
+                        updateTextbox(gTextbox, propertyValueColorPicker.Content.G.ToString());
+                        updateTextbox(bTextbox, propertyValueColorPicker.Content.B.ToString());
+
+                        currentChangingProperty.PropertyValue = Color.FromArgb(int.Parse(aTextbox.Text), propertyValueColorPicker.Content);
                     }
                 };
 
@@ -199,8 +221,13 @@ namespace ThemeEngineTest.Forms
             {
                 controlsNamesListbox.Items.Add(controlName);
                 EditedTheme.ChangingControls.Add(
-                    new Custom_Definitions.ChangingControl() { ControlName = controlName }
-                    );
+                    new Custom_Definitions.ChangingControl()
+                    {
+                        ControlName = controlName,
+                        IsTypeTemplate = changingControlTypeRadio.Checked
+
+                    }
+                );
             }
         }
 
@@ -209,13 +236,16 @@ namespace ThemeEngineTest.Forms
             // only show the properties editor if theres any control name selected
             propertiesGroupBox.Visible = controlsNamesListbox.SelectedIndex > -1;
 
-            // a control is selected in the listbox
+            // a changing control is selected in the listbox
             if (propertiesGroupBox.Visible)
             {
-                // populate the properties listbox based on the selected control's properties
                 Custom_Definitions.ChangingControl currentChangingControl = GetSelectedChangingControl();
-                if (currentChangingControl != null && currentChangingControl.ChangingProperties != null)
+                if (currentChangingControl != null)
                 {
+                    //changingControlTypeRadio.Checked = currentChangingControl.IsTypeTemplate;
+                    //changingControlNameRadio.Checked = !currentChangingControl.IsTypeTemplate;
+
+                    // populate the properties listbox based on the selected control's properties
                     propertiesListbox.Items.Clear();
                     foreach (Custom_Definitions.ChangingProperty changingProperty in currentChangingControl.ChangingProperties)
                     {
@@ -280,6 +310,9 @@ namespace ThemeEngineTest.Forms
 
         private void propertyTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Custom_Definitions.ChangingProperty currentChangingProperty = GetSelectedChangingProperty();
+            bool canEditChangingPropertyObject = currentChangingProperty != null;
+
             switch ((string)propertyTypeComboBox.SelectedItem)
             {
                 case "String":
@@ -305,6 +338,8 @@ namespace ThemeEngineTest.Forms
             EditedTheme.Name = themeNameTextbox.Text;
         }
 
+        bool preventPropertyUpdates = false;
+
         private void propertiesListbox_SelectedIndexChanged(object sender, EventArgs e)
         {
             propertyEditorPanel.Visible = propertiesListbox.SelectedIndex > -1;
@@ -315,18 +350,25 @@ namespace ThemeEngineTest.Forms
                 propertyNameTextbox.Text = currentChangingProperty.PropertyName;
                 propertyTypeComboBox.SelectedItem = currentChangingProperty.PropertyType.ToString();
 
+                preventPropertyUpdates = true;
                 switch (currentChangingProperty.PropertyType)
                 {
                     case Custom_Definitions.PropertyType.String:
                         propertyValueTextbox.Text = (string)currentChangingProperty.PropertyValue;
                         break;
                     case Custom_Definitions.PropertyType.Color:
-                        propertyValueColorPicker.Content = (Color)currentChangingProperty.PropertyValue;
+                        Color c = (Color)currentChangingProperty.PropertyValue;
+                        aTextbox.Text = c.A.ToString();
+                        rTextbox .Text = c.R.ToString();
+                        gTextbox.Text = c.G.ToString();
+                        bTextbox .Text = c.B.ToString();
+                        propertyValueColorPicker.Content = c;
                         break;
                     case Custom_Definitions.PropertyType.Bool:
                         propertyValueCheckbox.Checked = (bool)currentChangingProperty.PropertyValue;
                         break;
                 }
+                preventPropertyUpdates = false;
             }
         }
 
@@ -345,15 +387,16 @@ namespace ThemeEngineTest.Forms
             Custom_Definitions.ChangingControl currentChangingControl = GetSelectedChangingControl();
             if (currentChangingControl != null)
             {
-                Renamer_Form renamerForm = new Renamer_Form(oldName: currentChangingControl.ControlName);
-                if (renamerForm.ShowDialog() == DialogResult.OK)
+                Control_Editor_Form controlEditorForm = new Control_Editor_Form(oldName: currentChangingControl.ControlName, oldIsTypeTemplate: currentChangingControl.IsTypeTemplate);
+                if (controlEditorForm.ShowDialog() == DialogResult.OK)
                 {
                     // remove old name from the listbox
                     int listboxIndex = controlsNamesListbox.Items.IndexOf(currentChangingControl.ControlName);
                     controlsNamesListbox.Items.RemoveAt(listboxIndex);
 
                     // update selected control's ControlName property
-                    currentChangingControl.ControlName = renamerForm.NewName;
+                    currentChangingControl.ControlName = controlEditorForm.NewName;
+                    currentChangingControl.IsTypeTemplate = controlEditorForm.IsTypeTemplate;
 
                     // update listbox with the new name at the index of the old name
                     controlsNamesListbox.Items.Insert(listboxIndex, currentChangingControl.ControlName);

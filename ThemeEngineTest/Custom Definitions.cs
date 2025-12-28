@@ -45,6 +45,8 @@ namespace ThemeEngineTest
         [TypeConverter(typeof(ExpandableObjectConverter))]
         public class ChangingControl
         {
+            public bool IsTypeTemplate { get; set; } = false;
+
             public string ControlName { get; set; }
 
             [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]

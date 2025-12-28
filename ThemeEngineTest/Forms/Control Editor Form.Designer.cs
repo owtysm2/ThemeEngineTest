@@ -1,6 +1,6 @@
 ﻿namespace ThemeEngineTest.Forms
 {
-    partial class Renamer_Form
+    partial class Control_Editor_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -37,6 +37,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.newTextbox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.changingControlNameRadio = new System.Windows.Forms.RadioButton();
+            this.changingControlTypeRadio = new System.Windows.Forms.RadioButton();
             this.cuiPanel2.SuspendLayout();
             this.cuiPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -45,7 +47,7 @@
             // 
             this.cuiPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cuiPanel2.Controls.Add(this.button2);
-            this.cuiPanel2.Location = new System.Drawing.Point(132, 68);
+            this.cuiPanel2.Location = new System.Drawing.Point(132, 89);
             this.cuiPanel2.Name = "cuiPanel2";
             this.cuiPanel2.OutlineThickness = 1F;
             this.cuiPanel2.PanelColor = System.Drawing.Color.White;
@@ -70,7 +72,7 @@
             // 
             this.cuiPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cuiPanel1.Controls.Add(this.button1);
-            this.cuiPanel1.Location = new System.Drawing.Point(205, 68);
+            this.cuiPanel1.Location = new System.Drawing.Point(205, 89);
             this.cuiPanel1.Name = "cuiPanel1";
             this.cuiPanel1.OutlineThickness = 1F;
             this.cuiPanel1.PanelColor = System.Drawing.Color.White;
@@ -138,11 +140,37 @@
             this.label2.TabIndex = 38;
             this.label2.Text = "→";
             // 
-            // Renamer_Form
+            // changingControlNameRadio
+            // 
+            this.changingControlNameRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.changingControlNameRadio.AutoSize = true;
+            this.changingControlNameRadio.Location = new System.Drawing.Point(141, 61);
+            this.changingControlNameRadio.Name = "changingControlNameRadio";
+            this.changingControlNameRadio.Size = new System.Drawing.Size(96, 17);
+            this.changingControlNameRadio.TabIndex = 40;
+            this.changingControlNameRadio.Text = "Control\'s Name";
+            this.changingControlNameRadio.UseVisualStyleBackColor = false;
+            // 
+            // changingControlTypeRadio
+            // 
+            this.changingControlTypeRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.changingControlTypeRadio.AutoSize = true;
+            this.changingControlTypeRadio.Checked = true;
+            this.changingControlTypeRadio.Location = new System.Drawing.Point(48, 61);
+            this.changingControlTypeRadio.Name = "changingControlTypeRadio";
+            this.changingControlTypeRadio.Size = new System.Drawing.Size(87, 17);
+            this.changingControlTypeRadio.TabIndex = 39;
+            this.changingControlTypeRadio.TabStop = true;
+            this.changingControlTypeRadio.Text = "Type\'s Name";
+            this.changingControlTypeRadio.UseVisualStyleBackColor = false;
+            // 
+            // Control_Editor_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 113);
+            this.ClientSize = new System.Drawing.Size(284, 134);
+            this.Controls.Add(this.changingControlNameRadio);
+            this.Controls.Add(this.changingControlTypeRadio);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.newTextbox);
@@ -151,9 +179,9 @@
             this.Controls.Add(this.cuiPanel2);
             this.Controls.Add(this.cuiPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Renamer_Form";
+            this.Name = "Control_Editor_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Renamer";
+            this.Text = "Control Editor";
             this.cuiPanel2.ResumeLayout(false);
             this.cuiPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -172,5 +200,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox newTextbox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton changingControlNameRadio;
+        private System.Windows.Forms.RadioButton changingControlTypeRadio;
     }
 }
