@@ -93,8 +93,7 @@ namespace ThemeEngineTest.Components
                 themeEditorForm.referenceToFormOpenedInDesigner = formOpenedInDesigner;
                 themeEditorForm.LoadTheme(themeDefiner);
 
-                if (editorService.ShowDialog(themeEditorForm) == DialogResult.OK
-                    && themeEditorForm.DialogResult == DialogResult.OK)
+                if (editorService.ShowDialog(themeEditorForm) == DialogResult.OK)
                 {
                     // themeEditorForm exposes the new modified theme as a variable
                     var changeService =

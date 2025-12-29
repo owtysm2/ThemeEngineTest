@@ -36,7 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.propertyNameTextbox = new System.Windows.Forms.TextBox();
             this.propertyColorPickerPanel = new System.Windows.Forms.Panel();
-            this.propertyValueColorPicker = new CuoreUI.Controls.cuiColorPickerWheel();
+            this.propertyValueColorPicker = new ThemeEngineTest.Controls.Color_Picker_Wheel_Control();
             this.label8 = new System.Windows.Forms.Label();
             this.rTextbox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -45,9 +45,9 @@
             this.bTextbox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.aTextbox = new System.Windows.Forms.TextBox();
-            this.cuiPanel2 = new CuoreUI.Controls.cuiPanel();
+            this.cuiPanel2 = new ThemeEngineTest.Controls.Rounded_Panel_Control();
             this.button2 = new System.Windows.Forms.Button();
-            this.cuiPanel1 = new CuoreUI.Controls.cuiPanel();
+            this.cuiPanel1 = new ThemeEngineTest.Controls.Rounded_Panel_Control();
             this.button1 = new System.Windows.Forms.Button();
             this.propertyColorPickerPanel.SuspendLayout();
             this.cuiPanel2.SuspendLayout();
@@ -296,7 +296,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox propertyNameTextbox;
         private System.Windows.Forms.Panel propertyColorPickerPanel;
-        private CuoreUI.Controls.cuiColorPickerWheel propertyValueColorPicker;
+        private ThemeEngineTest.Controls.Color_Picker_Wheel_Control propertyValueColorPicker;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox rTextbox;
         private System.Windows.Forms.Label label9;
@@ -305,9 +305,9 @@
         private System.Windows.Forms.TextBox bTextbox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox aTextbox;
-        private CuoreUI.Controls.cuiPanel cuiPanel2;
+        private ThemeEngineTest.Controls.Rounded_Panel_Control cuiPanel2;
         private System.Windows.Forms.Button button2;
-        private CuoreUI.Controls.cuiPanel cuiPanel1;
+        private ThemeEngineTest.Controls.Rounded_Panel_Control cuiPanel1;
         private System.Windows.Forms.Button button1;
     }
 }

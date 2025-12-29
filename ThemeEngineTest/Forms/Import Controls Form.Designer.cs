@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.importedControlsListbox = new System.Windows.Forms.CheckedListBox();
-            this.cuiPanel2 = new CuoreUI.Controls.cuiPanel();
+            this.cuiPanel2 = new ThemeEngineTest.Controls.Rounded_Panel_Control();
             this.button2 = new System.Windows.Forms.Button();
-            this.cuiPanel1 = new CuoreUI.Controls.cuiPanel();
+            this.cuiPanel1 = new ThemeEngineTest.Controls.Rounded_Panel_Control();
             this.button1 = new System.Windows.Forms.Button();
             this.deselectAllButton = new System.Windows.Forms.Button();
             this.selectAllButton = new System.Windows.Forms.Button();
@@ -175,9 +175,9 @@
 
         #endregion
         private System.Windows.Forms.CheckedListBox importedControlsListbox;
-        private CuoreUI.Controls.cuiPanel cuiPanel2;
+        private ThemeEngineTest.Controls.Rounded_Panel_Control cuiPanel2;
         private System.Windows.Forms.Button button2;
-        private CuoreUI.Controls.cuiPanel cuiPanel1;
+        private ThemeEngineTest.Controls.Rounded_Panel_Control cuiPanel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button deselectAllButton;
         private System.Windows.Forms.Button selectAllButton;

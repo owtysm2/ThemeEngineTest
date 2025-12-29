@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CuoreUI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CuoreUI.Winforms.2025.12.14\lib\net472\CuoreUI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -53,6 +50,18 @@
       <DependentUpon>Theme Definer Component.cs</DependentUpon>
     </Compile>
     <Compile Include="API\API.cs" />
+    <Compile Include="Controls\Color Picker Wheel Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Color Picker Wheel Control.Designer.cs">
+      <DependentUpon>Color Picker Wheel Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Rounded Panel Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Rounded Panel Control.Designer.cs">
+      <DependentUpon>Rounded Panel Control.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Import Controls Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,9 +113,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

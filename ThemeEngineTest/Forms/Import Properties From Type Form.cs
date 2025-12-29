@@ -57,11 +57,22 @@ namespace ThemeEngineTest.Forms
                         PropertyType = Custom_Definitions.PropertyTypeFromType(property.PropertyType),
                         PropertyValue = null
                     });
-                    propertiesWhichCanBeImportedListbox.Items.Add($"({property.PropertyType.Name}) {property.Name}");
+                    propertiesWhichCanBeImportedListbox.Items.Add($"{property.Name} {property.PropertyType.Name}");
                 }
             }
 
-            //MessageBox.Show(CreatedChangingProperties.Count.ToString());
+            List<string> sortedProperties = propertiesWhichCanBeImportedListbox.Items.Cast<string>().ToList();
+            sortedProperties.Sort();
+            propertiesWhichCanBeImportedListbox.Items.Clear();
+
+            foreach (string item in sortedProperties)
+            {
+                string[] splitString = item.Split(' ');
+                string nameString = splitString[0].Trim();
+                string typeString = splitString[1].Trim();
+
+                propertiesWhichCanBeImportedListbox.Items.Add($"({typeString}) {nameString}");
+            }
         }
 
         public static PropertyInfo[] GetPropertiesFromType(Type type)

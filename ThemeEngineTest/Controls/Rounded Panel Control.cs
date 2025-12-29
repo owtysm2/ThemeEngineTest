@@ -1,0 +1,140 @@
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
+
+namespace ThemeEngineTest.Controls
+{
+    public partial class Rounded_Panel_Control : UserControl
+    {
+        public Rounded_Panel_Control()
+        {
+            InitializeComponent();
+            DoubleBuffered = true;
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
+        }
+
+        protected override void OnResize(EventArgs eventargs)
+        {
+            base.OnResize(eventargs);
+            Invalidate();
+        }
+
+        private Color privatePanelColor = Color.White;
+
+        [Category("CuoreUI")]
+        public Color PanelColor
+        {
+            get
+            {
+                return privatePanelColor;
+            }
+            set
+            {
+                privatePanelColor = value;
+                Invalidate();
+            }
+        }
+
+        private Color privatePanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
+
+        [Category("CuoreUI")]
+        public Color PanelOutlineColor
+        {
+            get
+            {
+                return privatePanelOutlineColor;
+            }
+            set
+            {
+                privatePanelOutlineColor = value;
+                Invalidate();
+            }
+        }
+
+        private float privateOutlineThickness = 1;
+
+        [Category("CuoreUI")]
+        public float OutlineThickness
+        {
+            get
+            {
+                return privateOutlineThickness;
+            }
+            set
+            {
+                privateOutlineThickness = value;
+                Invalidate();
+            }
+        }
+
+        private Padding privateRounding = new Padding(8, 8, 8, 8);
+
+        [Category("CuoreUI")]
+        public Padding Rounding
+        {
+            get
+            {
+                return privateRounding;
+            }
+            set
+            {
+                privateRounding = value;
+                Invalidate();
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+            Rectangle modifiedCR = ClientRectangle;
+            modifiedCR.Width -= 1;
+            modifiedCR.Height -= 1;
+
+            using (GraphicsPath roundBackground = RoundRect(modifiedCR, Rounding))
+            using (SolidBrush brush = new SolidBrush(PanelColor))
+            using (Pen pen = new Pen(PanelOutlineColor, OutlineThickness))
+            {
+                e.Graphics.FillPath(brush, roundBackground);
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
+                e.Graphics.DrawPath(pen, roundBackground);
+            }
+
+            base.OnPaint(e);
+        }
+
+        public static GraphicsPath RoundRect(RectangleF rectangle, Padding borderRadius)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            float diameter1 = (float)checked(borderRadius.Top * 2);
+            AddArc(rectangle.X, rectangle.Y, diameter1, 180f, 90f);
+
+            float diameter2 = (float)checked(borderRadius.Left * 2);
+            AddArc(rectangle.Right - diameter2, rectangle.Y, diameter2, 270f, 90f);
+
+            float diameter3 = (float)checked(borderRadius.Bottom * 2);
+            AddArc(rectangle.Right - diameter3, rectangle.Bottom - diameter3, diameter3, 0.0f, 90f);
+
+            float diameter4 = (float)checked(borderRadius.Right * 2);
+            AddArc(rectangle.X, rectangle.Bottom - diameter4, diameter4, 90f, 90f);
+
+            path.CloseFigure();
+            return path;
+
+            void AddArc(float x, float y, float diameter, float startAngle, float sweepAngle)
+            {
+                if ((double)diameter > 0.0)
+                {
+                    RectangleF rect = new RectangleF(x, y, diameter, diameter);
+                    path.AddArc(rect, startAngle, sweepAngle);
+                }
+                else
+                    path.AddLine(x, y, x + 0.01f, y);
+            }
+        }
+    }
+}
