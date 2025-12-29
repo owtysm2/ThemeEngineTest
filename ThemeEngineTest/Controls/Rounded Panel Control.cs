@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace ThemeEngineTest.Controls
 {
+    [ToolboxItem(false)]
     public partial class Rounded_Panel_Control : UserControl
     {
         public Rounded_Panel_Control()
