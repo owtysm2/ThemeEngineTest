@@ -18,9 +18,9 @@ A `Theme` is an object created by the `Theme Definer`. It contains the theme's n
 
 ### In short
 Create at design-time, load at run-time:
-- Each theme is created with a `Theme Definer`
-- Each theme gets assigned a name and a list of types (or individual controls) to affect
-- Each type (or individual control) gets assigned a list of properties to change.
+- Each `Theme` is created with a `Theme Definer`.
+- Each `Theme` gets assigned a name and a list of types (or individual controls) to affect. (internally called `ChangingControls`)
+- Each type (or individual control) gets assigned a list of properties to change. (internally called `ChangingProperties`)
 
 <img width="1603" height="909" alt="image" src="https://github.com/user-attachments/assets/d4e2784b-519f-4303-b9cb-eda59e9fd0f8" />
 
