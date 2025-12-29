@@ -76,6 +76,8 @@ Create at design-time, load at run-time:
 ---
 **3.** This form appears. For beginners, you can press "Import Controls from Current Form", and not worry about the UI too much.
 
+This button will process every control in your Form that's currently opened in the designer (if any) and get their names and types, which you can then select from a check list.
+
 You also don't have to worry about the `Theme`'s name unless you want to use it in another Form later.
 
 <img width="1378" height="879" alt="image" src="https://github.com/user-attachments/assets/a4c70764-9e32-411c-8019-763f3a6eb86e" />
