@@ -81,6 +81,8 @@ You also don't have to worry about the `Theme`'s name unless you want to use it 
 ---
 **4.** Here, select which types (or individual controls) you want to theme. In my case, I want to theme every Chart control, so I check "cuiChartLine" in the list and press "OK".
 
+(Notice that below the list, the "Import Types" option is selected. You can import individual controls by their names with the "Import Names" option.)
+
 <img width="1374" height="938" alt="image" src="https://github.com/user-attachments/assets/ecac5bc0-892f-420d-8564-ba3e798e1426" />
 
 ---
