@@ -115,13 +115,13 @@ I want the `UseBezier` property to be set to `True` with my `Theme`, so I checke
 ---
 **10.** I want to apply the theme when a button in my example app is pressed.
 
-This is actually simple, you call your theme definer's `.ApplyToForm(Form targetForm)` method:
+This is actually simple, you call your theme definer's `.ApplyTo(Control targetControlOrForm)` method:
 
 ```cs
-     private void cuiButton1_Click(object sender, EventArgs e)
-     {
-         theme_Definer1.ApplyToForm(this);
-     }
+        private void cuiButton1_Click(object sender, EventArgs e)
+        {
+            theme_Definer1.ApplyTo(this);
+        }
 ```
 ## The End Result
 
