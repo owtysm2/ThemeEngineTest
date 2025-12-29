@@ -26,7 +26,7 @@ Create at design-time, load at run-time:
 
 # 🚧 Important Notes
 > [!WARNING]
-> If you want to use a theme across Forms, the Theme's `parent Form (to which it was added) needs to have been shown at least once.
+> If you want to use a theme across Forms, the `Theme`'s parent Form (to which it was added) needs to have been shown at least once.
 
 > [!NOTE]
 > Dynamically created controls need to have the theme applied manually after creation:
@@ -59,6 +59,8 @@ Create at design-time, load at run-time:
 
 > [!NOTE]
 > Individual control name entries will have their Type properties, if any, applied first, and then their Name properties (also if any exist).
+>
+> (Basically, Name has higher priority than Type)
 
 # 😼 Usage Example
 
